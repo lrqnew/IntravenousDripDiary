@@ -1,0 +1,58 @@
+ header{
+    min-width: 40px;
+    height: 40px;
+    background: #363f45;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
+header .nav{
+    width: 75%;
+    height: 40px;
+}
+header .left{
+    width: 30%;
+    height: 40px;
+    float: left;
+}
+header .nav .left a{
+    line-height: 40px;
+}
+header .nav img{
+    vertical-align: middle;
+}
+header  span.tody{
+    color: #c4c4c4;
+    font-size: 12px;
+    font-weight: normal;
+    vertical-align: middle;
+}
+header .right{
+  width: 70%;
+  float: right;
+}
+header .right .topNavigation{
+    text-align: right;
+    width: 100%;
+    height: 40px;
+    display:flex;
+    flex-direction:row;
+    padding: 0;
+    margin: 0;
+    flex-wrap: nowrap ;
+    justify-content:flex-end;
+    align-items: center;
+}
+header .right .topNavigation>li{
+    list-style: none;
+    width: 40px;
+}
+header .topNavigation a{
+    color: #fff;
+}
+
+header .topNavigation>li>a .icon{
+    font-size:18px;
+    line-height: 40px;
+}
+
