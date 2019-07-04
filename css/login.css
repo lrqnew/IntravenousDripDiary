@@ -7,3 +7,27 @@
     background-color: #BDE7ED;
     background-image: url(../images/bg_day.png);
 }
+@-webkit-keyframes sun {
+    0% {
+        -webkit-transform: translateX(0px) scaleX(1) scaleY(1);
+
+    }
+    42% {
+        -webkit-transform: translateX(2px) scaleX(1.05) scaleY(1.05);
+    }
+    83% {
+        -webkit-transform: translateX(-2px) scaleX(1) scaleY(1);
+    }
+    126% {
+        -webkit-transform: translateY(2px) scaleX(1.05) scaleY(1.05);
+    }
+    100% {
+        -webkit-transform: translateY(0px) scaleX(1) scaleY(1);
+    }
+}
+.the_sun{
+    -webkit-animation: sun 5s 0s infinite ease normal none;
+    position: absolute;
+    top:12%;
+    left: 15%;
+}
