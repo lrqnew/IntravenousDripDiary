@@ -15,7 +15,7 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 
-<body class="page-login page-login-day">
+<body class="page-login page-login-night">
 	<!--头部start-->
 	<div class="header">
 		<div class="nav">
@@ -43,33 +43,64 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-5 col-sm-offset-7 col-lg-4 col-lg-offset-8">
-					<div class="user_login_reg_box"></div>
-					<div class="mobile_client" align="center">
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="col-xs-6 active">
-								<a href="#tab-item-1" aria-controls="tab-item-1" role="tab" data-toggle="tab">用户登录</a>
+					<div class="user_login_reg_box">
+						<ul class="nav nav-tabs" >
+							<li role="presentation" class="col-xs-6" >
+								<a href="#"  data-target="#tab-item-1"  data-toggle="tab">用户登录</a>
 							</li>
 							<li role="presentation" class="col-xs-6">
-								<a href="#tab-item-2" aria-controls="tab-item-2" role="tab" data-toggle="tab">用户注册</a>
+								<a href="#"  data-target="#tab-item-2" data-toggle="tab" >用户注册</a>
 							</li>
 						</ul>
+
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane fade in active" id="tab-item-1">
+							<!-- 登录 -->
+							<div  class="tab-pane active" id="tab-item-1">
 								<form action="" data-parsley-validate novalidate>
                                     <div class="form-group">
 											<input name="username" type="text" class="form-control simple-form-control" placeholder="电子邮件" required="" data-parsley-error-message="请输入您的电子邮箱" data-parsley-id="4">
-											<i class="fa fa-envelope"></i>
+											<span class="glyphicon glyphicon-envelope"></span>
 									</div>
 									<div class="form-group">
+											
 											<input name="password" type="password" class="form-control simple-form-control" placeholder="您的密码" required="" data-parsley-error-message="请输入密码" data-parsley-id="6">
-											<i class="fa fa-lock"></i>
+											<span class="glyphicon glyphicon-lock"></span>
 									</div>
 									<div class="form-group">
 											<button type="submit" class="btn btn-orange submit">立 即 登 录</button>
 									</div>
 								</form>
 							</div>
+							<!-- 注册 -->
+							<div  class="tab-pane  " id="tab-item-2">
+									<form action="" data-parsley-validate novalidate>
+										<div class="form-group">
+												<input name="username" type="text" class="form-control simple-form-control" placeholder="电子邮件" required="" data-parsley-error-message="请输入您的电子邮箱" data-parsley-id="4">
+												<span class="glyphicon glyphicon-envelope"></span>
+										</div>
+										<div class="form-group">
+												
+												<input name="password" type="password" class="form-control simple-form-control" placeholder="您的密码" required="" data-parsley-error-message="请输入密码" data-parsley-id="6">
+												<span class="glyphicon glyphicon-lock"></span>
+										</div>
+										<div class="form-group">
+												
+												<input name="password" type="password" class="form-control simple-form-control" placeholder="您的密码" required="" data-parsley-error-message="请再次输入密码" data-parsley-id="6">
+												<span class="glyphicon glyphicon-lock"></span>
+										</div>
+										<div class="form-group">
+												<button type="submit" class="btn btn-orange submit">立 即 注 册</button>
+										</div>
+									</form>
+								</div>
 						</div>
+						<p align="right">
+							<a href="" class="btn btn-xs btn-success">关于我们</a>
+						</p>
+					</div>
+					<div class="mobile_client" align="center">
+						
+						
 					</div>
 				</div>
 			</div>
