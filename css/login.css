@@ -54,24 +54,38 @@
     background-color: rgb(34, 80, 90);
     border: 2px solid #26373A;
 }
+.page-login-day .user_login_reg_box{
+    background-color: rgba(161, 223, 232, 1);
+    border: 2px solid #E3F9FF;
+}
 .user_login_reg_box{
     padding: 20px;
 }
 .page-login-night .nav-tabs {
     border-bottom: 1px solid #227280;
 }
+.page-login-day .nav-tabs {
+    border-bottom: 1px solid #46DBF1;
+}
 .page-login-night .nav-tabs a.active {
     background: #225D6B;
     border-bottom: none;
+    color: #fff;
 }
+.page-login-day .nav-tabs a.active {
+    background: #46DBF1;
+    color: #fff;
+    border-bottom: none;
+}
+
 .user_login_reg_box .nav-tabs li {
     text-align: center;
 }
-.page-login-night .nav-tabs li.active a {
+.page-login-night .nav-tabs li.active a,.page-login-day .nav-tabs li.active a {
     background: none;
     border-bottom: none;
 }
-.page-login-night .nav-tabs > li.active > a {
+.page-login-night .nav-tabs > li.active > a,.page-login-day .nav-tabs > li.active > a {
     color: #FFFFFF;
     border: none;
 }
@@ -95,6 +109,11 @@
     color: #FFFFFF;
     border-bottom-color: #225D6B;
     background-color: #225D6B;
+}
+.page-login-day .nav-tabs > li > a:hover, .page-login-day .nav-tabs > li > a:focus {
+    color: #FFFFFF;
+    border-bottom-color: #46DBF1;
+    background-color: #46DBF1;
 }
 .tab-content{
     padding: 20px 0;
@@ -147,6 +166,10 @@
 }
 .page-login-night .btn-orange {
     background-color: #1B785C;
+    color: #fff;
+}
+.page-login-day .btn-orange {
+    background-color: #46DBF1;
     color: #fff;
 }
 .btn.btn-orange:hover {
