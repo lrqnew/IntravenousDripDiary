@@ -111,7 +111,21 @@ export default {
 };
 </script>
 <style scoped>
+.page-login {
+    background: url(./assets/images/bg_day.png) no-repeat center;
+    color: #BDE7ED;
+    background-size: cover;
+}
 
+.page-login-day {
+    background-color: #BDE7ED;
+    background-image: url(./assets/images/bg_day.png);
+}
+
+.page-login-night {
+    background-color: #1B4B56;
+    background-image: url(./assets/images/bg_night.png);
+}
 @-webkit-keyframes sun {
     0% {
         -webkit-transform: translateX(0px) scaleX(1) scaleY(1);

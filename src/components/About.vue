@@ -60,7 +60,7 @@
                   </div>
                   <div class="modal-body" align="center">
                     <div class="intro">
-                      <div class="content"> 
+                      <div class="content">
                         <h4>v1.0.0</h4>
                         <p class="log">
                           <span>□ PC端增加了日记导出功能。</span>
@@ -79,7 +79,7 @@
                         </p>
                       </div>
                       <p>
-                        <a href class="txt-small">返回</a>
+                        <a href="javascript:void(0)" class="txt-small" data-dismiss="modal">返回</a>
                       </p>
                     </div>
                   </div>
@@ -166,7 +166,6 @@ a:focus {
   white-space: normal;
   background-color: rgba(255, 255, 255, 0.901961);
 }
-
 .aboutUsWrap .intro .content .log {
   box-sizing: border-box;
   margin-top: 0px;
@@ -181,8 +180,8 @@ a:focus {
 .aboutUsWrap .intro .content .log span {
   font-size: 12px;
 }
-.intro .content{
-    text-align: left;
+.intro .content {
+  text-align: left;
 }
 </style>
 
