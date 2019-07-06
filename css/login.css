@@ -67,12 +67,12 @@
 .page-login-day .nav-tabs {
     border-bottom: 1px solid #46DBF1;
 }
-.page-login-night .nav-tabs a.active {
+.page-login-night .nav-tabs li.active {
     background: #225D6B;
     border-bottom: none;
     color: #fff;
 }
-.page-login-day .nav-tabs a.active {
+.page-login-day .nav-tabs li.active {
     background: #46DBF1;
     color: #fff;
     border-bottom: none;
@@ -175,4 +175,9 @@
 .btn.btn-orange:hover {
     background: #fe470d;
 }
-
+.mobile_client {
+    line-height: 32px;
+}
+.qrcode{
+    color: #000;
+}
