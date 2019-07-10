@@ -1,34 +1,52 @@
 <template>
   <div id="app">
-     <Login></Login>
+    <Login></Login>
   </div>
 </template>
 
 <script>
-import Login from './components/Index'
-
+import Login from "./components/Login";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Login
-  }
-}
+  },
+  data() {
+    return {
+      isNight: false,
+      isDay: true
+    };
+  },
+  mounted() {
+    //获取当前时间
+    var now=new Date();
+    var hour = now.getHours();
+    if(hour<19){
+      document.getElementsByTagName("body")[0].setAttribute("class","page-login page-login-day");
+    }else{
+       document.getElementsByTagName("body")[0].setAttribute("class","page-login page-login-night");
+    }
+  },
+  // beforeDestroy() {
+  //   document.body.removeAttribute("class", "equipment-body");
+  // }
+};
 </script>
 
 <style>
 .page-login {
-    background: url(./assets/images/bg_day.png) no-repeat center;
-    color: #BDE7ED;
-    background-size: cover;
+  background: url(./assets/images/bg_day.png) no-repeat center;
+  color: #bde7ed;
+  background-size: cover;
 }
 
 .page-login-day {
-    background-color: #BDE7ED;
-    background-image: url(./assets/images/bg_day.png);
+  background-color: #bde7ed;
+  background-image: url(./assets/images/bg_day.png);
 }
 
 .page-login-night {
-    background-color: #1B4B56;
-    background-image: url(./assets/images/bg_night.png);
+  background-color: #1b4b56;
+  background-image: url(./assets/images/bg_night.png);
 }
 </style>

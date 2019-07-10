@@ -3,7 +3,7 @@
    <Header></Header>
 		<!--主体start-->
 	<div class="the_sun">
-		<img src="../assets/images/the_sun.png" alt="">
+		<img :src="Day" alt="">
 	</div>
 	<div class="loginContentWrap">
 		<div class="container">
@@ -98,8 +98,6 @@
 			</div>
 		</div>
 	</div>
-
-	
 </div>
 </template>
 <script>
@@ -107,24 +105,39 @@ import Header from './Header'
 export default {
   components: {
     Header: Header
-  }
+  },
+  data(){
+      return{
+          Day:require("../assets/images/the_sun.png"),
+      }
+  },
+  mounted() {
+    //获取当前时间
+    var now=new Date();
+    var hour = now.getHours();
+    if(hour<19){
+      this.Day=require("../assets/images/the_sun.png");
+    }else{
+       this.Day=require("../assets/images/the_moon.png");
+    }
+  },
 };
 </script>
 <style scoped>
 .page-login {
-    background: url(./assets/images/bg_day.png) no-repeat center;
+    background: url(../assets/images/bg_day.png) no-repeat center;
     color: #BDE7ED;
     background-size: cover;
 }
 
 .page-login-day {
     background-color: #BDE7ED;
-    background-image: url(./assets/images/bg_day.png);
+    background-image: url(../assets/images/bg_day.png);
 }
 
 .page-login-night {
     background-color: #1B4B56;
-    background-image: url(./assets/images/bg_night.png);
+    background-image: url(../assets/images/bg_night.png);
 }
 @-webkit-keyframes sun {
     0% {
@@ -214,7 +227,7 @@ export default {
 .page-login-night .nav-tabs > li > a:hover, .page-login-night .nav-tabs > li > a:focus {
     color: #FFFFFF;
     border-bottom-color: #225D6B;
-    background-color: #225D6B;
+    background-color: transparent;
 }
 .page-login-day .nav-tabs > li > a:hover, .page-login-day .nav-tabs > li > a:focus {
     color: #FFFFFF;
@@ -247,7 +260,7 @@ export default {
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     outline: 0;
-    border-color: #e6e7ed;
+    /* border-color: #e6e7ed; */
     border-left: 3px solid #4bae4f;
     font-weight: 400;
     height: 56px;
