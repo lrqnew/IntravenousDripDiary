@@ -3,7 +3,7 @@
     <div class="nav">
       <div class="left">
         <a href="/">
-          <img src="../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
+          <img src="../../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
         </a>
         <span class="left_w">
           <!-- <img src="./images/site_desc.png" alt=""> -->

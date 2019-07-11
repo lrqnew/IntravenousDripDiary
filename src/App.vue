@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <Login></Login>
+    <!-- <Login></Login> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Login from "./components/Login";
+//  import Login from "./components/Login";
 export default {
   name: "app",
   components: {
-    Login
+    //  Login
   },
   data() {
     return {
@@ -33,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .page-login {
   background: url(./assets/images/bg_day.png) no-repeat center;
   color: #bde7ed;
