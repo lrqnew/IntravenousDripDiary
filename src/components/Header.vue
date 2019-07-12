@@ -8,7 +8,7 @@
         <span class="left_w">
           <!-- <img src="./images/site_desc.png" alt=""> -->
           <span class="tody">记录人生从这里开始</span>
-          <span class="tody">&nbsp;&nbsp;2019/06/29</span>
+          <span class="tody">&nbsp;&nbsp;{{nowTime}}</span>
         </span>
       </div>
       <div class="right">
@@ -24,12 +24,31 @@
   </div>
 </template>
 <script>
+import { setInterval } from 'timers';
 export default {
+  data(){
+    return({
+       nowTime:""
+    })
+  },
   methods: {
     // about() {
     //   this.$router.replace({path:'about'})
     // }
-  }
+  },
+  mounted() {
+    //获取当前时间,动态更新
+    this.timeId= setInterval(()=>{
+       var now = new Date().toLocaleString();
+       this.nowTime=now
+    },1000)
+  },
+  beforeDestroy:function(){
+           //实例销毁前青出于定时器
+           if(this.timeId){
+               clearInterval(this.timeId);
+           }
+       }
 };
 </script>
 <style scoped>

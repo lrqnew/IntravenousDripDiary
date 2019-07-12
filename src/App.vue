@@ -35,6 +35,9 @@ export default {
 </script>
 
 <style >
+#app{
+  height: 100%;
+}
 .page-login {
   background: url(./assets/images/bg_day.png) no-repeat center;
   color: #bde7ed;

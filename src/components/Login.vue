@@ -21,7 +21,7 @@
               <div class="tab-content">
                 <!-- 登录 -->
                 <div class="tab-pane active" id="tab-item-1">
-                  <form action data-parsley-validate novalidate>
+                  <div class="form" >
                     <div class="form-group">
                       <input
                         name="username"
@@ -47,13 +47,13 @@
                       <span class="glyphicon glyphicon-lock"></span>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-orange submit">立 即 登 录</button>
+                      <button  class="btn btn-orange submit" @click="login()">立 即 登 录</button>
                     </div>
-                  </form>
+                  </div>
                 </div>
                 <!-- 注册 -->
                 <div class="tab-pane" id="tab-item-2">
-                  <form action data-parsley-validate novalidate>
+                  <div class="form"  >
                     <div class="form-group">
                       <input
                         name="username"
@@ -91,9 +91,9 @@
                       <span class="glyphicon glyphicon-lock"></span>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-orange submit">立 即 注 册</button>
+                      <button  class="btn btn-orange submit">立 即 注 册</button>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
               <p align="right">
@@ -160,9 +160,9 @@ export default {
     }
   },
   methods: {
-    // about() {
-    //   this.$router.replace({path:'about'})
-    // }
+    login() {
+      this.$router.push({path:'/index'})
+    }
   }
 };
 </script>
@@ -283,11 +283,11 @@ export default {
 .tab-content {
   padding: 20px 0;
 }
-.loginContentWrap form .form-group {
+.loginContentWrap .form .form-group {
   margin: 0;
   position: relative;
 }
-.loginContentWrap form .form-control {
+.loginContentWrap .form .form-control {
   padding-left: 65px;
   margin: -1px 0 0 0;
   font-size: 2rem;
@@ -313,7 +313,7 @@ export default {
   padding: 16px 18px;
   margin-bottom: 20px;
 }
-.loginContentWrap form .form-group .glyphicon {
+.loginContentWrap .form .form-group .glyphicon {
   position: absolute;
   left: 26px;
   top: 20px;
@@ -321,7 +321,7 @@ export default {
   font-size: 16px;
   font-size: 1.6rem;
 }
-.loginContentWrap form .btn {
+.loginContentWrap .form .btn {
   margin: 20px 0 0 0;
   font-size: 2rem;
   font-weight: 700;

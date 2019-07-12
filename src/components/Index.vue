@@ -100,7 +100,7 @@ export default {
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
-    overflow: hidden;
+   
     height: 100%;
 }
 .layout-logo{
@@ -117,10 +117,11 @@ export default {
     margin: 0 auto;
     margin-right: 20px;
 }
+
 </style>
 <style>
   body{
-      background: #fff !important;
+      background: #fff ;
   }
 </style>
 
