@@ -2,9 +2,9 @@
    <div class="header">
     <div class="nav">
       <div class="left">
-        <a href="/">
+        <router-link to="/">
           <img src="../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
-        </a>
+        </router-link>
         <span class="left_w">
           <!-- <img src="./images/site_desc.png" alt=""> -->
           <span class="tody">记录人生从这里开始</span>
@@ -14,9 +14,9 @@
       <div class="right">
         <ul class="topNavigation">
           <li>
-            <a href title="关于点滴日记">
+            <router-link title="关于点滴日记" to="/about">
               <span class="icon glyphicon glyphicon-info-sign"></span>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -25,7 +25,11 @@
 </template>
 <script>
 export default {
-  
+  methods: {
+    // about() {
+    //   this.$router.replace({path:'about'})
+    // }
+  }
 };
 </script>
 <style scoped>

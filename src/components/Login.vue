@@ -97,12 +97,12 @@
                 </div>
               </div>
               <p align="right">
-                <!-- <a href class="btn btn-xs btn-success" @click="about()">关于我们</a> -->
+                <!-- <a  class="btn btn-xs btn-success" @click="about()">关于我们</a> -->
                 <router-link class="btn btn-xs btn-success" to="/about">关于我们</router-link>
               </p>
             </div>
             <div class="mobile_client" align="center">
-              <a href data-toggle="modal" data-target="#myModal">
+              <a  data-toggle="modal" data-target="#myModal">
                 <strong>访问点滴日记手机版</strong>
               </a>
             </div>
@@ -160,9 +160,9 @@ export default {
     }
   },
   methods: {
-    about() {
-      this.$router.replace({path:'about'})
-    }
+    // about() {
+    //   this.$router.replace({path:'about'})
+    // }
   }
 };
 </script>

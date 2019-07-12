@@ -1,14 +1,15 @@
 <template>
   <div>
+    <Header></Header>
     <!-- 主体 -->
     <div class="aboutUsWrap">
       <div class="container">
-        <div class="">
+        <div class>
           <div class="col-md-4 col-xs-12 col-lg-4 col-md-offset-1 col-lg-offset-1 about">
             <!-- 关于我们 -->
             <div class="intro">
               <h3>关于我们</h3>
-              <hr/>
+              <hr />
               <div class="content">
                 <p>
                   <strong>什么是点滴日记？</strong>
@@ -36,7 +37,7 @@
                   <br />
                 </p>
               </div>
-              <a href class="btn btn-success">开启我的日记本</a>
+              <router-link to="/" class="btn btn-success">开启我的日记本</router-link>
               <p>
                 <a href class="txt-small" data-toggle="modal" data-target="#myModal">更新记录</a>
               </p>
@@ -61,7 +62,7 @@
                   <div class="modal-body" align="center">
                     <div class="intro">
                       <div class="content">
-                        <h4>v1.0.0</h4>
+                        <!-- <h4>v1.0.0</h4>
                         <p class="log">
                           <span>□ PC端增加了日记导出功能。</span>
                         </p>
@@ -70,7 +71,17 @@
                         </p>
                         <p class="log">
                           <span>□ 修复PC端日记阅读页面在部分情况下显示错位的问题。</span>
-                        </p>
+                        </p>-->
+                        <Timeline>
+                          <TimelineItem color="green">
+                            <Icon type="ios-trophy" slot="dot"></Icon>
+                            <span>发布里程碑版本</span>
+                          </TimelineItem>
+                          <TimelineItem>PC端增加了日记导出功能。</TimelineItem>
+                          <TimelineItem>PC端日记阅读页面增加天气信息。</TimelineItem>
+                          <TimelineItem>修复PC端日记阅读页面在部分情况下显示错位的问题。</TimelineItem>
+                          
+                        </Timeline>
                         <p>
                           <br />
                         </p>
@@ -93,13 +104,18 @@
   </div>
 </template>
 <script>
-export default {};
+import Header from "./Header";
+export default {
+  components: {
+    Header
+  }
+};
 </script>
 <style >
 body {
-  background: url(../assets/images/aboutUs.png) no-repeat !important;
-  background-size: cover !important;
-  background-color: #dfccaa !important;
+  background: url(../assets/images/aboutUs.png) no-repeat;
+  background-size: cover;
+  background-color: #dfccaa;
 }
 </style>
 <style scoped>
