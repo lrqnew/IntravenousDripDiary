@@ -3,12 +3,12 @@
     <!-- 主体 -->
     <div class="aboutUsWrap">
       <div class="container">
-        <div class="row">
+        <div class="">
           <div class="col-md-4 col-xs-12 col-lg-4 col-md-offset-1 col-lg-offset-1 about">
             <!-- 关于我们 -->
             <div class="intro">
               <h3>关于我们</h3>
-              <hr />
+              <hr/>
               <div class="content">
                 <p>
                   <strong>什么是点滴日记？</strong>
@@ -95,13 +95,14 @@
 <script>
 export default {};
 </script>
-<style>
+<style >
 body {
   background: url(../assets/images/aboutUs.png) no-repeat !important;
   background-size: cover !important;
   background-color: #dfccaa !important;
 }
-
+</style>
+<style scoped>
 .aboutUsWrap {
   font-family: Microsoft YaHei, "宋体", Tahoma, Helvetica, Arial, "\5b8b\4f53",
     sans-serif;

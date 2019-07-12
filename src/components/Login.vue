@@ -97,7 +97,8 @@
                 </div>
               </div>
               <p align="right">
-                <a href class="btn btn-xs btn-success" @click="about()">关于我们</a>
+                <!-- <a href class="btn btn-xs btn-success" @click="about()">关于我们</a> -->
+                <router-link class="btn btn-xs btn-success" to="/about">关于我们</router-link>
               </p>
             </div>
             <div class="mobile_client" align="center">
@@ -138,7 +139,7 @@
   </div>
 </template>
 <script>
-import Header from "./Home/Header";
+import Header from "./Header";
 export default {
   components: {
     Header: Header
@@ -160,7 +161,7 @@ export default {
   },
   methods: {
     about() {
-      this.$router.replace('about')
+      this.$router.replace({path:'about'})
     }
   }
 };

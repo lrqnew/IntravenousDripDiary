@@ -4,7 +4,7 @@
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
                     <div class="layout-logo">
-                         <img src="../../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
+                         <img src="../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
                     </div>
                     <div class="layout-nav">
                         <MenuItem name="1">
