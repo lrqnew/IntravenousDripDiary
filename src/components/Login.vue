@@ -28,22 +28,23 @@
                         type="text"
                         class="form-control simple-form-control"
                         placeholder="电子邮件"
-                        required
-                        data-parsley-error-message="请输入您的电子邮箱"
-                        data-parsley-id="4"
                       />
+                       <ul class="parsley-errors-list">
+                          <li class="parsley-custom-error-message">请输入您的电子邮箱</li>
+                      </ul>
                       <span class="glyphicon glyphicon-envelope"></span>
                     </div>
+               
                     <div class="form-group">
                       <input
                         name="password"
                         type="password"
                         class="form-control simple-form-control"
                         placeholder="您的密码"
-                        required
-                        data-parsley-error-message="请输入密码"
-                        data-parsley-id="6"
                       />
+                       <ul class="parsley-errors-list">
+                          <li class="parsley-custom-error-message">请输入密码</li>
+                      </ul>
                       <span class="glyphicon glyphicon-lock"></span>
                     </div>
                     <div class="form-group">
@@ -55,6 +56,7 @@
                 <div class="tab-pane" id="tab-item-2">
                   <div class="form"  >
                     <div class="form-group">
+                       
                       <input
                         name="username"
                         type="text"
@@ -64,30 +66,35 @@
                         data-parsley-error-message="请输入您的电子邮箱"
                         data-parsley-id="4"
                       />
+                      <ul class="parsley-errors-list">
+                          <li class="parsley-custom-error-message">错误的邮箱格式</li>
+                      </ul>
                       <span class="glyphicon glyphicon-envelope"></span>
+ 
                     </div>
                     <div class="form-group">
                       <input
                         name="password"
                         type="password"
                         class="form-control simple-form-control"
-                        placeholder="您的密码"
-                        required
-                        data-parsley-error-message="请输入密码"
-                        data-parsley-id="6"
+                        placeholder="您的密码"           
                       />
+                      <ul class="parsley-errors-list">
+                          <li class="parsley-custom-error-message">请输入密码</li>
+                      </ul>
                       <span class="glyphicon glyphicon-lock"></span>
                     </div>
+
                     <div class="form-group">
                       <input
                         name="password"
                         type="password"
                         class="form-control simple-form-control"
                         placeholder="您的密码"
-                        required
-                        data-parsley-error-message="请再次输入密码"
-                        data-parsley-id="6"
                       />
+                      <ul class="parsley-errors-list">
+                          <li class="parsley-custom-error-message">请输入确认密码</li>
+                      </ul>
                       <span class="glyphicon glyphicon-lock"></span>
                     </div>
                     <div class="form-group">
@@ -161,7 +168,7 @@ export default {
   },
   methods: {
     login() {
-      this.$router.push({path:'/index'})
+      this.$router.pu({path:'/index'})
     }
   }
 };
@@ -345,6 +352,40 @@ export default {
 }
 .qrcode {
   color: #000;
+}
+/* 验证样式 */
+.loginContentWrap .form .parsley-errors-list {
+    position: absolute;
+    left: 105%;
+    top: 16px;
+    padding: 0;
+    background: #f92919;
+    margin: 0;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+.loginContentWrap .form .parsley-errors-list li {
+    display: block;
+    padding: 2px 10px;
+    margin: 0;
+    list-style-type: none;
+    position: relative;
+}
+
+.loginContentWrap .form .parsley-errors-list li:before, .loginContentWrap .form .parsley-errors-list li:after {
+    content: '';
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.loginContentWrap .form .parsley-errors-list li:before {
+    border-right-color: red;
+    border-width: 6px;
+    margin-top: -6px;
 }
 </style>
 
