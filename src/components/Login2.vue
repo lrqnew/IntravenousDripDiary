@@ -307,6 +307,7 @@
                         if (document.getElementsByClassName('tipsDiv')[0]) {
                            
                             document.getElementsByClassName('tipsDiv')[0].remove();
+                            
                         }
 
                     }

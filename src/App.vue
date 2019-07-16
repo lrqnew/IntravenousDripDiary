@@ -40,7 +40,7 @@ export default {
 }
 .page-login {
   background: url(./assets/images/bg_day.png) no-repeat center;
-  color: #bde7ed;
+  /* color: #bde7ed; */
   background-size: cover;
 }
 
