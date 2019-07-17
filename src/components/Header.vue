@@ -7,7 +7,7 @@
         </router-link>
         <span class="left_w">
           <!-- <img src="./images/site_desc.png" alt=""> -->
-          <span class="tody">记录人生从这里开始</span>
+          <span class="tody">&nbsp;&nbsp;记录人生从这里开始</span>
           <span class="tody">&nbsp;&nbsp;{{nowTime}}</span>
         </span>
       </div>

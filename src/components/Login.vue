@@ -21,7 +21,11 @@
               <div class="tab-content">
                 <!-- 登录 -->
                 <div class="tab-pane active" id="tab-item-1">
-                  <Form>
+                  <Form
+                    ref="loginFoemValidate"
+                    :model="loginFoemValidate"
+                    :rules="loginRuleValidate"
+                  >
                     <div class="form">
                       <div class="form-group">
                         <!-- <input
@@ -30,8 +34,8 @@
                         class="form-control simple-form-control"
                         placeholder="电子邮件"
                         />-->
-                        <FormItem prop>
-                          <Input placeholder="电子邮件" size="large">
+                        <FormItem prop="mail">
+                          <Input placeholder="电子邮件" size="large" v-model="loginFoemValidate.mail">
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
@@ -48,8 +52,13 @@
                         class="form-control simple-form-control"
                         placeholder="您的密码"
                         />-->
-                        <FormItem prop>
-                          <Input type="password" placeholder="您的密码" size="large">
+                        <FormItem prop="password">
+                          <Input
+                            type="password"
+                            placeholder="您的密码"
+                            size="large"
+                            v-model="loginFoemValidate.password"
+                          >
                             <Icon type="ios-lock-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
@@ -59,7 +68,10 @@
                         <!-- <span class="glyphicon glyphicon-lock"></span> -->
                       </div>
                       <div class="form-group">
-                        <Button class="btn btn-orange " @click="login()">立 即 登 录</Button>
+                        <Button
+                          class="btn btn-orange"
+                          @click="loginHandleSubmit('loginFoemValidate')"
+                        >立 即 登 录</Button>
                       </div>
                     </div>
                   </Form>
@@ -70,7 +82,7 @@
                     <div class="form">
                       <div class="form-group">
                         <FormItem prop="mail">
-                          <Input placeholder="电子邮件" size="large" v-model="formValidate.mail" >
+                          <Input placeholder="电子邮件" size="large" v-model="formValidate.mail">
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
@@ -110,14 +122,22 @@
                           <li class="parsley-custom-error-message">请输入确认密码</li>
                         </ul>-->
                         <!-- <span class="glyphicon glyphicon-lock"></span> -->
-                        <FormItem prop>
-                          <Input type="password" placeholder="确认密码" size="large">
+                        <FormItem prop="passwordCheck">
+                          <Input
+                            type="password"
+                            placeholder="确认密码"
+                            size="large"
+                            v-model="formValidate.passwordCheck"
+                          >
                             <Icon type="ios-lock-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
                       </div>
                       <div class="form-group">
-                        <Button  class="btn btn-orange sumit" @click="handleSubmit('formValidate')">立 即 注 册</Button>
+                        <Button
+                          class="btn btn-orange sumit"
+                          @click="handleSubmit('formValidate')"
+                        >立 即 注 册</Button>
                       </div>
                     </div>
                   </Form>
@@ -174,14 +194,39 @@ export default {
     Header: Header
   },
   data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入您的密码"));
+      } else {
+        if (this.formValidate.passwordCheck !== "") {
+          // 对第二个密码框单独验证
+          this.$refs.formValidate.validateField("passwordCheck");
+        }
+        callback();
+      }
+    };
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入您的密码"));
+      } else if (value !== this.formValidate.password) {
+        callback(new Error("两次密码输入不一致!"));
+      } else {
+        callback();
+      }
+    };
     return {
       Day: require("../assets/images/the_sun.png"),
-      formValidate: {
+      loginFoemValidate: {
         mail: "",
         password: ""
       },
-      //注册验证规则
-      ruleValidate: {
+      formValidate: {
+        mail: "",
+        password: "",
+        passwordCheck: ""
+      },
+      //登录验证规则
+      loginRuleValidate: {
         mail: [
           {
             required: true,
@@ -203,6 +248,32 @@ export default {
             trigger: "blur"
           }
         ]
+      },
+      //注册验证规则
+      ruleValidate: {
+        mail: [
+          {
+            required: true,
+            message: "邮箱不能为空",
+            trigger: "blur"
+          },
+          { type: "email", message: "不正确的电子邮件格式", trigger: "blur" }
+        ],
+        // password: [
+        //   {
+        //     required: true,
+        //     message: "请填写密码",
+        //     trigger: "blur"
+        //   },
+        //   {
+        //     type: "string",
+        //     min: 6,
+        //     message: "密码长度不能小于6位",
+        //     trigger: "blur"
+        //   }
+        // ]
+        password: [{ validator: validatePass, trigger: "blur" }],
+        passwordCheck: [{ validator: validatePassCheck, trigger: "blur" }]
       }
     };
   },
@@ -217,21 +288,51 @@ export default {
     }
   },
   methods: {
-    login() {
-      this.$router.push({ path: "/index" });
-    },
+    //注册
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("注册成功!");
+          // console.log(this.formValidate.mail);
+          // this.$Message.success("注册成功!");
 
+          this.$axios
+            .post("/api/user/reg", {
+              email: this.formValidate.mail,
+              userPwd: this.formValidate.password
+            })
+            .then(res => {
+              if (res.data.code == 200) {
+                this.$Message.success("注册成功!");
+              } else {
+                this.$Message.success("注册失败!");
+              }
+            });
         } else {
-          this.$Message.error("信息填写错误");
+          this.$Message.error("注册信息填写错误");
         }
       });
     },
-    handleReset(name) {
-      this.$refs[name].resetFields();
+    //登录
+    loginHandleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$axios
+            .post("/api/user/login", {
+              email: this.loginFoemValidate.mail,
+              userPwd: this.loginFoemValidate.password
+            })
+            .then(res => {
+              if (res.data.code == 200) {
+                this.$Message.success("登录成功!");
+                this.$router.push({ path: "/index" });
+              }else{
+                 this.$Message.error("邮箱或密码错误!");
+              }
+            });
+        } else {
+          this.$Message.error("登录信息填写错误");
+        }
+      });
     }
   }
 };
@@ -452,7 +553,7 @@ export default {
   border-width: 6px;
   margin-top: -6px;
 }
-.ivu-btn{
+.ivu-btn {
   border-color: none;
 }
 </style>
