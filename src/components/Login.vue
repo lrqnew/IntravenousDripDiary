@@ -189,11 +189,21 @@
 <script>
 import Header from "./Header";
 import { constants } from "crypto";
+import { type } from 'os';
 export default {
   components: {
     Header: Header
   },
   data() {
+    //邮箱验证
+    const isHasEmail=(rule,value,callback)=>{
+      this.$axios.get("/api/user/selectMail",{params:{email:value}}).then(res=>{
+       if(res.data.code===200){
+         callback(new Error("此邮箱已被注册"))
+       }
+        callback();
+      })
+    }
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入您的密码"));
@@ -257,7 +267,8 @@ export default {
             message: "邮箱不能为空",
             trigger: "blur"
           },
-          { type: "email", message: "不正确的电子邮件格式", trigger: "blur" }
+          { type: "email", message: "不正确的电子邮件格式", trigger: "blur" },
+           { validator: isHasEmail, trigger: "blur" },
         ],
         // password: [
         //   {

@@ -19,10 +19,11 @@
                             <Icon type="ios-keypad"></Icon>
                             建议
                         </MenuItem>
-                        <MenuItem name="4">
-                            <Icon type="ios-analytics"></Icon>
-                            关于
+                         <router-link to="/about">
+                         <MenuItem name="4">
+                            <Icon type="ios-analytics"></Icon>关于
                         </MenuItem>
+                         </router-link>
                         <MenuItem name="5">
                             <Icon type="ios-paper"></Icon>
                             退出登录
@@ -32,6 +33,9 @@
             </Header>
             <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
+                     <div class="demo-avatar">
+      <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large"/>
+    </div>
                     <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
                         <Submenu name="1">
                             <template slot="title">
@@ -72,16 +76,7 @@
                         </Submenu>
                     </Menu>
                 </Sider>
-                <Layout :style="{padding: '0 24px 24px'}">
-                    <Breadcrumb :style="{margin: '24px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb>
-                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                        Content
-                    </Content>
-                </Layout>
+                   <router-view></router-view>
             </Layout>
         </Layout>
     </div>
@@ -91,10 +86,19 @@
 export default {
     components:{
         
+    },
+    mounted(){
+      this.$router.push({path:'/home/UserCenter'})
     }
 }
 </script>
 <style scoped>
+/* a{
+    color: rgba(255,255,255,.7);
+}
+li:hover a{
+    color: #fff;
+} */
 .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
@@ -117,7 +121,11 @@ export default {
     margin: 0 auto;
     margin-right: 20px;
 }
-
+.demo-avatar>span{
+    width: 200px;
+    height: 200px;
+    border-radius: 0px;
+}
 </style>
 <style>
   body{

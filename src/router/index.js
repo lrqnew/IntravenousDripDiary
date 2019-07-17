@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import About from '@/components/About'
 import Index from '@/components/Index'
+import UserCenter from '@/components/home/UserCenter'
 Vue.use(Router)
 
 export default new Router({
@@ -16,7 +17,13 @@ export default new Router({
             component: About
         }, {
             path: '/index',
-            component: Index
+            component: Index,
+            children:[
+                {
+                    path:'/home/UserCenter',
+                    component:UserCenter
+                }
+            ]
         }
 
     ]
