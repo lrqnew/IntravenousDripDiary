@@ -13,16 +13,22 @@ module.exports = {
               })
         ]
       },
-      devServer: {
-        proxy: {
-          '/api': {
-            target: 'http://127.0.0.1:8081', //对应自己的接口
-            changeOrigin: true,
-            ws: true,
-            pathRewrite: {
-              '^/api': ''
-            }
-          }
-        }
-      }
+      //开发环境实现跨域
+      // devServer: {
+      //   proxy: {
+      //     '/api': {
+      //       target: 'http://127.0.0.1:8081', //对应自己的接口
+      //       changeOrigin: true,
+      //       ws: true,
+      //       pathRewrite: {
+      //         '^/api': ''
+      //       }
+      //     }
+      //   }
+      // },
+
+      // 部署应用包时的基本 URL。
+  publicPath: process.env.NODE_ENV === 'production'? './': '/',
+  // publicPath: process.env.VUE_APP_BASE_API === 'production'? './': '/',
+  
 }

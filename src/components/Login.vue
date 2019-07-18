@@ -307,7 +307,7 @@ export default {
           // this.$Message.success("注册成功!");
 
           this.$axios
-            .post("/api/user/reg", {
+            .post("", {
               email: this.formValidate.mail,
               userPwd: this.formValidate.password
             })
@@ -327,18 +327,18 @@ export default {
     loginHandleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$axios
-            .post("/api/user/login", {
+          this.request.httpPost(this.requestUrl.userLogin,{
               email: this.loginFoemValidate.mail,
               userPwd: this.loginFoemValidate.password
-            })
-            .then(res => {
+            }).then(res => {
+              console.log(res);
               if (res.data.code == 200) {
                 this.$Message.success("登录成功!");
                 this.$router.push({ path: "/index" });
               }else{
                  this.$Message.error("邮箱或密码错误!");
               }
+            }).catch(err=>{
             });
         } else {
           this.$Message.error("登录信息填写错误");
