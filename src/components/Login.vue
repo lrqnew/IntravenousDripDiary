@@ -8,14 +8,24 @@
     <div class="loginContentWrap">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-5 col-sm-offset-7 col-lg-4 col-lg-offset-8">
+          <div
+            class="col-xs-12 col-sm-5 col-sm-offset-7 col-lg-4 col-lg-offset-8"
+          >
             <div class="user_login_reg_box">
               <ul class="nav nav-tabs">
                 <li role="presentation" class="col-xs-6 active">
-                  <a href="#" data-target="#tab-item-1" data-toggle="tab" class="active">用户登录</a>
+                  <a
+                    href="#"
+                    data-target="#tab-item-1"
+                    data-toggle="tab"
+                    class="active"
+                    >用户登录</a
+                  >
                 </li>
                 <li role="presentation" class="col-xs-6">
-                  <a href="#" data-target="#tab-item-2" data-toggle="tab">用户注册</a>
+                  <a href="#" data-target="#tab-item-2" data-toggle="tab"
+                    >用户注册</a
+                  >
                 </li>
               </ul>
               <div class="tab-content">
@@ -35,7 +45,11 @@
                         placeholder="电子邮件"
                         />-->
                         <FormItem prop="mail">
-                          <Input placeholder="电子邮件" size="large" v-model="loginFoemValidate.mail">
+                          <Input
+                            placeholder="电子邮件"
+                            size="large"
+                            v-model="loginFoemValidate.mail"
+                          >
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
@@ -71,18 +85,27 @@
                         <Button
                           class="btn btn-orange"
                           @click="loginHandleSubmit('loginFoemValidate')"
-                        >立 即 登 录</Button>
+                          >立 即 登 录</Button
+                        >
                       </div>
                     </div>
                   </Form>
                 </div>
                 <!-- 注册 -->
                 <div class="tab-pane" id="tab-item-2">
-                  <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
+                  <Form
+                    ref="formValidate"
+                    :model="formValidate"
+                    :rules="ruleValidate"
+                  >
                     <div class="form">
                       <div class="form-group">
                         <FormItem prop="mail">
-                          <Input placeholder="电子邮件" size="large" v-model="formValidate.mail">
+                          <Input
+                            placeholder="电子邮件"
+                            size="large"
+                            v-model="formValidate.mail"
+                          >
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
@@ -137,7 +160,8 @@
                         <Button
                           class="btn btn-orange sumit"
                           @click="handleSubmit('formValidate')"
-                        >立 即 注 册</Button>
+                          >立 即 注 册</Button
+                        >
                       </div>
                     </div>
                   </Form>
@@ -146,7 +170,9 @@
 
               <p align="right">
                 <!-- <a  class="btn btn-xs btn-success" @click="about()">关于我们</a> -->
-                <router-link class="btn btn-xs btn-success" to="/about">关于我们</router-link>
+                <router-link class="btn btn-xs btn-success" to="/about"
+                  >关于我们</router-link
+                >
               </p>
             </div>
             <div class="mobile_client" align="center">
@@ -189,25 +215,32 @@
 <script>
 import Header from "./Header";
 import { constants } from "crypto";
-import { type } from 'os';
+import { type } from "os";
 export default {
   components: {
     Header: Header
   },
   data() {
     //邮箱验证
-    const isHasEmail=(rule,value,callback)=>{
-      this.$axios.get("/api/user/selectMail",{params:{email:value}}).then(res=>{
-       if(res.data.code===200){
-         callback(new Error("此邮箱已被注册"))
-       }
-        callback();
-      })
-    }
+    const isHasEmail = (rule, value, callback) => {
+      this.request
+        .httpGet(this.requestUrl.selectMail, { email: value })
+        .then(res => {
+          callback();
+        })
+        .catch(err => {
+          callback(new Error("此邮箱已被注册"));
+        });
+    };
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入您的密码"));
       } else {
+        if(value.length<6)
+        {
+           callback(new Error("密码长度不能小于6位"));
+          
+        }
         if (this.formValidate.passwordCheck !== "") {
           // 对第二个密码框单独验证
           this.$refs.formValidate.validateField("passwordCheck");
@@ -250,12 +283,6 @@ export default {
             required: true,
             message: "请填写密码",
             trigger: "blur"
-          },
-          {
-            type: "string",
-            min: 6,
-            message: "密码长度不能小于6位",
-            trigger: "blur"
           }
         ]
       },
@@ -268,7 +295,7 @@ export default {
             trigger: "blur"
           },
           { type: "email", message: "不正确的电子邮件格式", trigger: "blur" },
-           { validator: isHasEmail, trigger: "blur" },
+          { validator: isHasEmail, trigger: "blur" }
         ],
         // password: [
         //   {
@@ -303,20 +330,16 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          // console.log(this.formValidate.mail);
-          // this.$Message.success("注册成功!");
-
-          this.$axios
-            .post("", {
+          this.request
+            .httpPost(this.requestUrl.userReg, {
               email: this.formValidate.mail,
               userPwd: this.formValidate.password
             })
             .then(res => {
-              if (res.data.code == 200) {
-                this.$Message.success("注册成功!");
-              } else {
-                this.$Message.success("注册失败!");
-              }
+              this.$Message.success("注册成功!");
+            })
+            .catch(err => {
+              this.$Message.success("注册失败!");
             });
         } else {
           this.$Message.error("注册信息填写错误");
@@ -327,23 +350,23 @@ export default {
     loginHandleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.request.httpPost(this.requestUrl.userLogin,{
+          this.request
+            .httpPost(this.requestUrl.userLogin, {
               email: this.loginFoemValidate.mail,
               userPwd: this.loginFoemValidate.password
-            }).then(res => {
-              if (res.code == 200) {
-                this.$Message.success("登录成功!");
-                this.$router.push({ path: "/index" });
-              }else{
-                 this.$Message.error("邮箱或密码错误!");
-              }
-            }).catch(err=>{
+            })
+            .then(res => {
+              this.$Message.success("登录成功!");
+              this.$router.push({ path: "/index" });
+            })
+            .catch(err => {
+              this.$Message.error("邮箱或密码错误!");
             });
         } else {
           this.$Message.error("登录信息填写错误");
         }
       });
-    } 
+    }
   }
 };
 </script>
