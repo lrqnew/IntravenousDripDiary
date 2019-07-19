@@ -13,6 +13,15 @@ module.exports = {
               })
         ]
       },
+       // 开发环境下端口、地址等相关配置
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    },
+    host: '0.0.0.0', // 地址
+     port: 8080 // 端口
+  },
       //开发环境实现跨域
       // devServer: {
       //   proxy: {

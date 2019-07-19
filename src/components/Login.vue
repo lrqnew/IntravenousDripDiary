@@ -331,8 +331,7 @@ export default {
               email: this.loginFoemValidate.mail,
               userPwd: this.loginFoemValidate.password
             }).then(res => {
-              console.log(res);
-              if (res.data.code == 200) {
+              if (res.code == 200) {
                 this.$Message.success("登录成功!");
                 this.$router.push({ path: "/index" });
               }else{
@@ -344,7 +343,7 @@ export default {
           this.$Message.error("登录信息填写错误");
         }
       });
-    }
+    } 
   }
 };
 </script>
