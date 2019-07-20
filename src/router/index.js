@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import About from '@/components/About'
 import Index from '@/components/Index'
 import UserCenter from '@/components/home/UserCenter'
+import WriteDiary from '@/components/home/WriteDiary'
 Vue.use(Router)
 
 
@@ -21,8 +22,12 @@ Vue.use(Router)
             component: Index,
             children:[
                 {
-                    path:'/home/UserCenter',
+                    path:'/home/userCenter',
                     component:UserCenter
+                },
+                {
+                    path:'/home/writeDiary',
+                    component:WriteDiary
                 }
             ]
         }
@@ -37,6 +42,9 @@ router.beforeEach((to,from,nex)=>{
     else if(to.path=="/index"){
         nex() 
     }
+    else if(to.path=="/about"){
+        nex() 
+    }
     else
     {
       if(localStorage.getItem("token"))
@@ -45,7 +53,7 @@ router.beforeEach((to,from,nex)=>{
       }
       else
       {
-        nex({path:'/'})
+        nex({path:'/login'})
       }
     }
   

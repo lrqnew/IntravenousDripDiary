@@ -37,7 +37,7 @@
                   <br />
                 </p>
               </div>
-              <router-link to="/" class="btn btn-success">开启我的日记本</router-link>
+              <a class="btn btn-success" @click="open()">开启我的日记本</a>
               <p>
                 <a href class="txt-small" data-toggle="modal" data-target="#myModal">更新记录</a>
               </p>
@@ -108,6 +108,21 @@ import Header from "./Header";
 export default {
   components: {
     Header
+  },
+  data(){
+    return {
+      aa:true
+    }
+  },
+  methods:{
+    open(){
+      let token=localStorage.getItem('token');
+      if(token){
+        this.$router.push({path:'/home/userCenter'})
+      }else{
+        this.$router.push({path:'/'});
+      }
+    }
   }
 };
 </script>

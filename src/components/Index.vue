@@ -10,23 +10,24 @@
             />
           </div>
           <div class="layout-nav">
-            <MenuItem name="1">
-              <Icon type="ios-navigate"></Icon>
+            <MenuItem name="1" to="/home/userCenter">
+              <Icon type="md-person" />
               用户中心
             </MenuItem>
-            <MenuItem name="2">
-              <Icon type="ios-navigate"></Icon>
+            <MenuItem name="2" to="/home/writeDiary">
+              <Icon type="md-create" />
               记录日记
             </MenuItem>
             <MenuItem name="3">
-              <Icon type="ios-keypad"></Icon>
+              <Icon type="md-mail-open" />
               建议
             </MenuItem>
-              <MenuItem name="4" to="/about">
-                <Icon type="ios-analytics"></Icon>关于
-              </MenuItem>
+            <MenuItem name="4" to="/about">
+              <Icon type="ios-pricetags-outline" />
+              关于
+            </MenuItem>
             <MenuItem name="5" @click.native="exit()">
-              <Icon type="ios-paper"></Icon>
+              <Icon type="ios-power" />
               退出登录
             </MenuItem>
           </div>
@@ -46,24 +47,23 @@
             width="auto"
             :open-names="['1']"
           >
-            <Submenu name="1">
-              <template slot="title">
-                <Icon type="ios-keypad"></Icon>
-                用户中心
-              </template>
-            </Submenu>
+            <MenuItem name="2-1" to="/home/userCenter">
+              <Icon type="md-person" />
+              用户中心
+            </MenuItem>
+
             <Submenu name="2">
               <template slot="title">
-                <Icon type="ios-keypad"></Icon>
+                <Icon type="md-bookmarks" />
                 我的日记本
               </template>
-              <MenuItem name="2-1">记录日记</MenuItem>
+              <MenuItem name="2-1" to="/home/writeDiary">记录日记</MenuItem>
               <MenuItem name="2-2">所有日记</MenuItem>
               <MenuItem name="2-3">日记标签</MenuItem>
             </Submenu>
             <Submenu name="3">
               <template slot="title">
-                <Icon type="ios-analytics"></Icon>
+                <Icon type="ios-paper" />
                 我的资料
               </template>
               <MenuItem name="3-1">我的头像</MenuItem>
@@ -71,18 +71,18 @@
             </Submenu>
             <Submenu name="4">
               <template slot="title">
-                <Icon type="ios-analytics"></Icon>
+                <Icon type="ios-unlock" />
                 安全设置
               </template>
               <MenuItem name="4-1">密码修改</MenuItem>
             </Submenu>
-            <Submenu name="5">
-              <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                退出登录
-              </template>
-              <MenuItem name="5-1" @click.native="exit()">安全退出</MenuItem>
-            </Submenu>
+        
+            
+              <MenuItem name="5-1" @click.native="exit()">
+              <Icon type="ios-power" />
+              安全退出
+              </MenuItem>
+       
           </Menu>
         </Sider>
         <router-view></router-view>
@@ -93,19 +93,17 @@
 <script>
 export default {
   components: {},
-  data(){
-     return{
-       
-     }
+  data() {
+    return {};
   },
   mounted() {
     this.$router.push({ path: "/home/UserCenter" });
   },
-  methods:{
-     exit(){
-        localStorage.clear();
-        this.$router.push({ path: "/" });
-     }
+  methods: {
+    exit() {
+      localStorage.clear();
+      this.$router.push({ path: "/" });
+    }
   }
 };
 </script>

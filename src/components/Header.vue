@@ -2,16 +2,26 @@
    <div class="header">
     <div class="nav">
       <div class="left">
-        <router-link to="/">
+       <Row type="flex" justify="start">
+        <Col span="6" :xs="22" :sm="20" :md="14" :lg="6">
+          <router-link to="/">
           <img src="../assets/images/site_logo.png" title="点滴日记-日记本,网络日记本,在线日记应用" />
         </router-link>
-        <span class="left_w">
-          <!-- <img src="./images/site_desc.png" alt=""> -->
-          <span class="tody">&nbsp;&nbsp;记录人生从这里开始</span>
-          <span class="tody">&nbsp;&nbsp;{{nowTime}}</span>
-        </span>
+        </Col>
+        <Col span="6" :xs="0" :sm="0" :md="0" :lg="6">
+         <span class="tody">记录人生从这里开始</span>
+        </Col>
+        <Col span="6" :xs="0" :sm="0" :md="0" :lg="6">
+  <span class="tody">{{nowTime}}</span>
+        </Col>
+        <Col span="6" :xs="2" :sm="4" :md="10" :lg="6">
+        <router-link title="关于点滴日记" to="/about">
+              <span class="icon glyphicon glyphicon-info-sign"></span>
+            </router-link>
+        </Col>
+    </Row>
       </div>
-      <div class="right">
+      <!-- <div class="right">
         <ul class="topNavigation">
           <li>
             <router-link title="关于点滴日记" to="/about">
@@ -19,7 +29,7 @@
             </router-link>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -60,18 +70,16 @@ export default {
   position: relative;
   z-index: 2;
 }
-.header .nav {
+/* .header .nav {
   width: 75%;
   height: 40px;
-}
+} */
 .header .left {
-  width: 30%;
+  width: 50%;
   height: 40px;
-  float: left;
+ line-height: 40px;
 }
-.header .nav .left a {
-  line-height: 40px;
-}
+
 .header .nav img {
   vertical-align: middle;
 }
@@ -81,31 +89,12 @@ export default {
   font-weight: normal;
   vertical-align: middle;
 }
-.header .right {
-  width: 70%;
-  float: right;
-}
-.header .right .topNavigation {
-  text-align: right;
-  width: 100%;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  padding: 0;
-  margin: 0;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
-}
-.header .right .topNavigation > li {
-  list-style: none;
-  width: 40px;
-}
-.header .topNavigation a {
+
+.header  a {
   color: #fff;
 }
-.header .topNavigation > li > a .icon {
-  font-size: 18px;
+.header  a .icon {
+  font-size: 14px;
   line-height: 40px;
 }
 </style>

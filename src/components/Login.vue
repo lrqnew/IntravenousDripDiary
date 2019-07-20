@@ -361,8 +361,6 @@ export default {
               //保存token
               localStorage.setItem('token', res.token);
               localStorage.setItem('user_email', res.email);
-              console.log(res);
-              console.log(localStorage.getItem('user_email'));
             })
             .catch(err => {
               this.$Message.error("邮箱或密码错误!");

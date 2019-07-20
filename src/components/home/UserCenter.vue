@@ -8,22 +8,29 @@
     <Content :style="{ padding: '24px', minHeight: '280px' }">
       <!-- 内容统计面板 -->
       <div class="total">
-        <Row type="flex" justify="start">
-          <Col span="8">
+        <Row type="flex" justify="space-around">
+          <Col span="6">
             <Card>
               <div style="text-align:center">
                 A high quality UI Toolkit based on Vue.js
               </div>
             </Card>
           </Col>
-          <Col span="8">
+          <Col span="6">
             <Card>
               <div style="text-align:center">
                 A high quality UI Toolkit based on Vue.js
               </div>
             </Card>
           </Col>
-          <Col span="8">
+          <Col span="6">
+            <Card>
+              <div style="text-align:center">
+                A high quality UI Toolkit based on Vue.js
+              </div>
+            </Card>
+          </Col>
+          <Col span="6">
             <Card>
               <div style="text-align:center">
                 A high quality UI Toolkit based on Vue.js
@@ -36,7 +43,7 @@
       <div class="content_bot">
         <Row>
           <Col span="16">
-            <Card style="width:90%;height:400px;" dis-hover :bordered="false">
+            <Card style="width:95%;height:400px;" dis-hover :bordered="false">
               <p slot="title"><Icon type="md-create" />日记概览</p>
               <a href="#" slot="extra">
                 <Icon type="md-more" />
@@ -81,9 +88,7 @@ export default {
           attrs: { type: "text/javascript" },
          
         });
-        el.text=`WIDGET = {
-        ID: "cEw6o3JfT9"
-      }`
+        el.text=`WIDGET = {ID: 'qednB1yr2E'};`
         return el;
       }
     }
@@ -108,11 +113,11 @@ h3 > .uemai {
   margin-left: 10px;
 }
 .total {
-  width: 90%;
+  width: 100%;
   color: #fff;
 }
 .total .ivu-row-flex .ivu-col .ivu-card {
-  width: 400px;
+  width: 350px;
   height: 100px;
   line-height: 100px;
 }
@@ -125,9 +130,12 @@ h3 > .uemai {
 .total .ivu-row-flex .ivu-col:nth-child(3) .ivu-card {
   background: #ed4014;
 }
+.total .ivu-row-flex .ivu-col:nth-child(4) .ivu-card {
+  background: #ff9900;
+}
 .content_bot {
   margin-top: 20px;
-  width: 90%;
+  width: 100%;
 }
 </style>
 
