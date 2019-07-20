@@ -6,6 +6,7 @@ import 'iview/dist/styles/iview.css';
 import router from './router'
 import request from '@/assets/request/api.js'
 import requestUrl from '@/assets/request/requestUrl.js'
+
 Vue.prototype.request = request
 Vue.prototype.requestUrl = requestUrl.url
 Vue.config.productionTip = false

@@ -2,7 +2,7 @@
   <Layout :style="{ padding: '0 24px 24px' }">
     <h3 class="uname">
       钢铁侠
-      <span class="uemai">{{ user_email}}</span>
+      <span class="uemai">{{ user_email }}</span>
       <Icon class="userSet" type="ios-cog-outline" size="22" />
     </h3>
     <Content :style="{ padding: '24px', minHeight: '280px' }">
@@ -46,6 +46,13 @@
           <Col span="8">
             <Card style="width:90%;height:400px;" dis-hover :bordered="false">
               <p slot="title"><Icon type="ios-cloud" />今日天气</p>
+              <!-- 点滴日记 -->
+              <div id="weather-view-he"></div>
+
+             <remote-js></remote-js>
+              <remote-script
+                src="https://apip.weatherdt.com/view/static/js/r.js?v=1111">
+              </remote-script>
             </Card>
           </Col>
         </Row>
@@ -53,15 +60,40 @@
     </Content>
   </Layout>
 </template>
+
 <script>
 export default {
-  components: {},
-  data(){
-    return{
-       user_email:localStorage.getItem('user_email')
+  components: {
+    //创建script标签组件
+    "remote-script": {
+      render(createElement) {
+        return createElement("script", {
+          attrs: { type: "text/javascript", src: this.src }
+        });
+      },
+      props: {
+        src: { type: String, required: true }
+      }
+    },
+    "remote-js": {
+      render(createElement) {
+        var el= createElement("script", {
+          attrs: { type: "text/javascript" },
+         
+        });
+        el.text=`WIDGET = {
+        ID: "cEw6o3JfT9"
+      }`
+        return el;
+      }
     }
-  }
-  
+  },
+  data() {
+    return {
+      user_email: localStorage.getItem("user_email")
+    };
+  },
+  mounted() {}
 };
 </script>
 <style scoped>
