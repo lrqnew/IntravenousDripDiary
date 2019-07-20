@@ -25,7 +25,7 @@
               <MenuItem name="4" to="/about">
                 <Icon type="ios-analytics"></Icon>关于
               </MenuItem>
-            <MenuItem name="5">
+            <MenuItem name="5" @click.native="exit()">
               <Icon type="ios-paper"></Icon>
               退出登录
             </MenuItem>
@@ -81,7 +81,7 @@
                 <Icon type="ios-analytics"></Icon>
                 退出登录
               </template>
-              <MenuItem name="5-1">安全退出</MenuItem>
+              <MenuItem name="5-1" @click.native="exit()">安全退出</MenuItem>
             </Submenu>
           </Menu>
         </Sider>
@@ -93,8 +93,19 @@
 <script>
 export default {
   components: {},
+  data(){
+     return{
+       
+     }
+  },
   mounted() {
     this.$router.push({ path: "/home/UserCenter" });
+  },
+  methods:{
+     exit(){
+        localStorage.clear();
+        this.$router.push({ path: "/" });
+     }
   }
 };
 </script>

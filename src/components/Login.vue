@@ -358,6 +358,11 @@ export default {
             .then(res => {
               this.$Message.success("登录成功!");
               this.$router.push({ path: "/index" });
+              //保存token
+              localStorage.setItem('token', res.token);
+              localStorage.setItem('user_email', res.email);
+              console.log(res);
+              console.log(localStorage.getItem('user_email'));
             })
             .catch(err => {
               this.$Message.error("邮箱或密码错误!");

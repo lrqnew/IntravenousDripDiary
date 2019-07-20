@@ -1,27 +1,33 @@
 <template>
-  <Layout :style="{padding: '0 24px 24px'}">
+  <Layout :style="{ padding: '0 24px 24px' }">
     <h3 class="uname">
       钢铁侠
-      <span class="uemai">1406107400@qq.com</span>
+      <span class="uemai">{{ user_email}}</span>
       <Icon class="userSet" type="ios-cog-outline" size="22" />
     </h3>
-    <Content :style="{padding: '24px', minHeight: '280px'}">
+    <Content :style="{ padding: '24px', minHeight: '280px' }">
       <!-- 内容统计面板 -->
       <div class="total">
         <Row type="flex" justify="start">
           <Col span="8">
             <Card>
-              <div style="text-align:center">A high quality UI Toolkit based on Vue.js</div>
+              <div style="text-align:center">
+                A high quality UI Toolkit based on Vue.js
+              </div>
             </Card>
           </Col>
           <Col span="8">
             <Card>
-              <div style="text-align:center">A high quality UI Toolkit based on Vue.js</div>
+              <div style="text-align:center">
+                A high quality UI Toolkit based on Vue.js
+              </div>
             </Card>
           </Col>
           <Col span="8">
             <Card>
-              <div style="text-align:center">A high quality UI Toolkit based on Vue.js</div>
+              <div style="text-align:center">
+                A high quality UI Toolkit based on Vue.js
+              </div>
             </Card>
           </Col>
         </Row>
@@ -29,23 +35,17 @@
       <!-- 内容底部 -->
       <div class="content_bot">
         <Row>
-          <Col span="16" >
+          <Col span="16">
             <Card style="width:90%;height:400px;" dis-hover :bordered="false">
-              <p slot="title">
-                <Icon type="md-create" />日记概览
-              </p>
+              <p slot="title"><Icon type="md-create" />日记概览</p>
               <a href="#" slot="extra">
                 <Icon type="md-more" />
               </a>
-             
             </Card>
           </Col>
           <Col span="8">
-           <Card style="width:90%;height:400px;" dis-hover :bordered="false">
-              <p slot="title">
-                <Icon type="ios-cloud" />今日天气
-              </p>
-            
+            <Card style="width:90%;height:400px;" dis-hover :bordered="false">
+              <p slot="title"><Icon type="ios-cloud" />今日天气</p>
             </Card>
           </Col>
         </Row>
@@ -55,7 +55,13 @@
 </template>
 <script>
 export default {
-  components: {}
+  components: {},
+  data(){
+    return{
+       user_email:localStorage.getItem('user_email')
+    }
+  }
+  
 };
 </script>
 <style scoped>
@@ -87,9 +93,9 @@ h3 > .uemai {
 .total .ivu-row-flex .ivu-col:nth-child(3) .ivu-card {
   background: #ed4014;
 }
-.content_bot{
-    margin-top: 20px;
-    width: 90%;
+.content_bot {
+  margin-top: 20px;
+  width: 90%;
 }
 </style>
 

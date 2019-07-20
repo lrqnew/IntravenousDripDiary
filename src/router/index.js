@@ -6,7 +6,8 @@ import Index from '@/components/Index'
 import UserCenter from '@/components/home/UserCenter'
 Vue.use(Router)
 
-export default new Router({
+
+ var router= new Router({
     mode: 'history',
     routes: [{
             path: '/',
@@ -27,4 +28,27 @@ export default new Router({
         }
 
     ]
-})
+});
+//全局守卫
+router.beforeEach((to,from,nex)=>{
+    if(to.path=='/'){
+      nex()
+    }
+    else if(to.path=="/index"){
+        nex() 
+    }
+    else
+    {
+      if(localStorage.getItem("token"))
+      {
+        nex()
+      }
+      else
+      {
+        nex({path:'/'})
+      }
+    }
+  
+  })
+  
+  export default router;
