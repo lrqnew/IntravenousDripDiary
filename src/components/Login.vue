@@ -226,10 +226,13 @@ export default {
       this.request
         .httpGet(this.requestUrl.selectMail, { email: value })
         .then(res => {
-          callback();
+         if(res.code===402){
+           callback(new Error("此邮箱已被注册"));
+         }
+         callback();
         })
         .catch(err => {
-          callback(new Error("此邮箱已被注册"));
+          callback(new Error(err));;
         });
     };
     const validatePass = (rule, value, callback) => {
@@ -358,6 +361,7 @@ export default {
             .then(res => {
               this.$Message.success("登录成功!");
               this.$router.push({ path: "/index" });
+              console.log(res);
               //保存token
               localStorage.setItem('token', res.token);
               localStorage.setItem('user_email', res.email);

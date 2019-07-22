@@ -79,7 +79,7 @@
         
             
               <MenuItem name="5-1" @click.native="exit()">
-              <Icon type="ios-power" />
+              <Icon type="md-power" />
               安全退出
               </MenuItem>
        

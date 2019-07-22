@@ -8,55 +8,54 @@ import WriteDiary from '@/components/home/WriteDiary'
 Vue.use(Router)
 
 
- var router= new Router({
-    mode: 'history',
-    routes: [{
-            path: '/',
-            component: Login
+var router = new Router({
+  mode: 'history',
+  routes: [{
+      path: '/',
+      component: Login
+    },
+    {
+      path: '/about',
+      component: About
+    }, {
+      path: '/index',
+      component: Index,
+      children: [{
+          path: '/home/userCenter',
+          component: UserCenter
         },
         {
-            path: '/about',
-            component: About
-        }, {
-            path: '/index',
-            component: Index,
-            children:[
-                {
-                    path:'/home/userCenter',
-                    component:UserCenter
-                },
-                {
-                    path:'/home/writeDiary',
-                    component:WriteDiary
-                }
-            ]
+          path: '/home/writeDiary',
+          component: WriteDiary
         }
-
-    ]
+      ]
+    }
+  ]
 });
 //全局守卫
-router.beforeEach((to,from,nex)=>{
-    if(to.path=='/'){
-      nex()
+router.beforeEach((to, from, nex) => {
+  if (to.path == '/') {
+    nex();
+  } else if (to.path == "/index") {
+    if (localStorage.getItem("token")) {
+      nex({
+        path: '/home/userCenter'
+      })
+    } else {
+      nex();
     }
-    else if(to.path=="/index"){
-        nex() 
+  } else if (to.path == "/about") {
+    nex();
+  } else {
+    if (localStorage.getItem("token")) {
+      nex();
+    } else {
+      nex({
+        path: '/'
+      })
     }
-    else if(to.path=="/about"){
-        nex() 
-    }
-    else
-    {
-      if(localStorage.getItem("token"))
-      {
-        nex()
-      }
-      else
-      {
-        nex({path:'/login'})
-      }
-    }
-  
-  })
-  
-  export default router;
+  }
+
+})
+
+export default router;

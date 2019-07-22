@@ -14,7 +14,7 @@ axios.interceptors.request.use((config) => {
   // if (config.method === 'post') { // 根据项目需求是否需要转换格式
   //   config.data = qs.stringify(config.data)
   // }
-  var token = null // 存储需要接口连接时验证（比如用户token等）的数据，此时设置为null，可根据项目不同，通过不同方式（比如存放在localStorage里）获取到并赋值
+  var token = localStorage.getItem('token'); // 存储需要接口连接时验证（比如用户token等）的数据，此时设置为null，可根据项目不同，通过不同方式（比如存放在localStorage里）获取到并赋值
   if (token) {
     //  同域处理
     config.headers.common.token = token
@@ -25,7 +25,9 @@ axios.interceptors.request.use((config) => {
 })
 //返回状态判断
 axios.interceptors.response.use((res) => {
-  if (res.data.code === SUCCESS) {
+  if (res.data.code ===200) {
+    return Promise.resolve(res)
+  }else if(res.data.code===402){
     return Promise.resolve(res)
   }
   else{
