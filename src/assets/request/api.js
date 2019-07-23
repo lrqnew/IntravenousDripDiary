@@ -1,23 +1,21 @@
 import axios from 'axios'
+import { promises } from 'fs';
 // import qs from 'qs'
 //  axios 配置
 axios.defaults.timeout = 10000
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-// axios.defaults.baseURL =process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'http://localhost:8081';// 配置数据请求的基础url
-axios.defaults.baseURL =process.env.VUE_APP_BASE_API; //不是应该变成http://localhost:8081，但是多了一个http://localhost:8080
-
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8,'
+// axios.defaults.baseURL =process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'http://localhost:8081';
+// 配置数据请求的基础url
+axios.defaults.baseURL =process.env.VUE_APP_BASE_API; 
 axios.defaults.withCredentials = false
-const SUCCESS = 200 // 成功时返回的code码，根据项目的不同和后台一致规定code码，此项目使用'200'
+// const SUCCESS = 200 // 成功时返回的code码，根据项目的不同和后台一致规定code码，此项目使用'200'
 
-// POST传参序列化
+// 请求拦截器
 axios.interceptors.request.use((config) => {
-  // if (config.method === 'post') { // 根据项目需求是否需要转换格式
-  //   config.data = qs.stringify(config.data)
-  // }
-  var token = localStorage.getItem('token'); // 存储需要接口连接时验证（比如用户token等）的数据，此时设置为null，可根据项目不同，通过不同方式（比如存放在localStorage里）获取到并赋值
+  var token = localStorage.getItem('token'); // 存储需要接口连接时验证（比如用户token等）的数据，可根据项目不同，通过不同方式（比如存放在localStorage里）获取到并赋值
   if (token) {
-    //  同域处理
-    config.headers.common.token = token
+    // 同域处理 Authorization:"Bearer "+token
+    config.headers.common.Authorization ="Bearer "+token;
   }
   return config
 }, (error) => {
@@ -29,8 +27,15 @@ axios.interceptors.response.use((res) => {
     return Promise.resolve(res)
   }else if(res.data.code===402){
     return Promise.resolve(res)
+  }else if(res.data.code===301){
+    return Promise.resolve(res)
+  }else if(res.data.code===401){
+    return Promise.resolve(res)
   }
   else{
+    if(res.status===200){
+      return Promise.reject(new Error(res.data.msg))
+    }
     return Promise.reject(new Error(res))
   }
   

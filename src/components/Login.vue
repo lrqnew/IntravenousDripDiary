@@ -72,6 +72,7 @@
                             placeholder="您的密码"
                             size="large"
                             v-model="loginFoemValidate.password"
+                            @on-enter="loginHandleSubmit('loginFoemValidate')"
                           >
                             <Icon type="ios-lock-outline" slot="prepend"></Icon>
                           </Input>
@@ -226,23 +227,21 @@ export default {
       this.request
         .httpGet(this.requestUrl.selectMail, { email: value })
         .then(res => {
-         if(res.code===402){
-           callback(new Error("此邮箱已被注册"));
-         }
-         callback();
+          if (res.code === 402) {
+            callback(new Error("此邮箱已被注册"));
+          }
+          callback();
         })
         .catch(err => {
-          callback(new Error(err));;
+          callback(new Error(err));
         });
     };
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入您的密码"));
       } else {
-        if(value.length<6)
-        {
-           callback(new Error("密码长度不能小于6位"));
-          
+        if (value.length < 6) {
+          callback(new Error("密码长度不能小于6位"));
         }
         if (this.formValidate.passwordCheck !== "") {
           // 对第二个密码框单独验证
@@ -359,15 +358,19 @@ export default {
               userPwd: this.loginFoemValidate.password
             })
             .then(res => {
-              this.$Message.success("登录成功!");
-              this.$router.push({ path: "/index" });
               console.log(res);
-              //保存token
-              localStorage.setItem('token', res.token);
-              localStorage.setItem('user_email', res.email);
+              if (res.code === 200) {
+                this.$Message.success("登录成功!");
+                this.$router.push({ path: "/index" });
+                //保存token
+                localStorage.setItem("token", res.token);
+                localStorage.setItem("user_email", res.email);
+              } else {
+                this.$Message.error("邮箱或密码错误!");
+              }
             })
             .catch(err => {
-              this.$Message.error("邮箱或密码错误!");
+               throw err;
             });
         } else {
           this.$Message.error("登录信息填写错误");
