@@ -1,7 +1,7 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
     <h3 class="uname">
-      钢铁侠
+       {{userName=="null"?"":userName}}
       <span class="uemai">{{ user_email }}</span>
       <Icon class="userSet" type="ios-cog-outline" size="22" />
     </h3>
@@ -95,7 +95,8 @@ export default {
   },
   data() {
     return {
-      user_email: localStorage.getItem("user_email")
+      user_email: localStorage.getItem("user_email"),
+      userName:localStorage.getItem("userName")
     };
   },
   mounted() {}

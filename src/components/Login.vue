@@ -364,7 +364,10 @@ export default {
                 this.$router.push({ path: "/index" });
                 //保存token
                 localStorage.setItem("token", res.token);
+                //保存用户邮箱
                 localStorage.setItem("user_email", res.email);
+                //保存用户名
+                localStorage.setItem("userName",res.userName);
               } else {
                 this.$Message.error("邮箱或密码错误!");
               }
