@@ -59,7 +59,7 @@
               </template>
               <MenuItem name="2-1" to="/writeDiary">记录日记</MenuItem>
               <MenuItem name="2-2" to="/allDiary">所有日记</MenuItem>
-              <MenuItem name="2-3">日记标签</MenuItem>
+              <MenuItem name="2-3" to="/diaryTags">日记标签</MenuItem>
             </Submenu>
             <Submenu name="3">
               <template slot="title">

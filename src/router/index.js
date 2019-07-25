@@ -6,6 +6,7 @@ import Index from '@/components/Index'
 import UserCenter from '@/views/UserCenter'
 import WriteDiary from '@/views/WriteDiary'
 import AllDiary from '@/views/AllDiary'
+import DiaryTags from '@/views/DiaryTags'
 Vue.use(Router)
 var router = new Router({
   mode: 'history',
@@ -30,6 +31,10 @@ var router = new Router({
         {
           path:'/allDiary',
           component:AllDiary
+        },
+        {
+          path:'/diaryTags',
+          component:DiaryTags
         }
       ]
     }
