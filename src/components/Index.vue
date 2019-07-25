@@ -66,7 +66,7 @@
                 <Icon type="ios-paper" />
                 我的资料
               </template>
-              <MenuItem name="3-1">我的头像</MenuItem>
+              <MenuItem name="3-1" to="/avatar">我的头像</MenuItem>
               <MenuItem name="3-2">个人资料</MenuItem>
             </Submenu>
             <Submenu name="4">
