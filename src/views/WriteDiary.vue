@@ -21,7 +21,7 @@
           <p slot="content">
            <Form  inline :label-width="90">
         <FormItem label="日记标题" >
-            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable="true">
+            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable>
             </Input>
         </FormItem>
         <FormItem label="隐私设置">
@@ -31,7 +31,7 @@
             </RadioGroup>
         </FormItem>
         <FormItem label="日记标签">
-           <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable="true" style="width: 600px">
+           <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable style="width: 600px">
             </Input>
         </FormItem>
          <FormItem>
@@ -99,8 +99,8 @@ export default {
         }
       }, // 富文本编辑器配置
       content: "", //富文本内容
-      formItem:{
-         radio: 'private',
+      formItem: {
+        radio: "private"
       }
     };
   },
@@ -121,7 +121,7 @@ export default {
 /* .write {
   height: auto;
 } */
-.ql-container{
+.ql-container {
   height: 400px !important;
 }
 </style>

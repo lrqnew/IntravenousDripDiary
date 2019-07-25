@@ -1,7 +1,7 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
     <h3 class="uname">
-       {{userName=="null"?"":userName}}
+      {{ userName == "null" ? "" : userName }}
       <span class="uemai">{{ user_email }}</span>
       <Icon class="userSet" type="ios-cog-outline" size="22" />
     </h3>
@@ -48,6 +48,10 @@
               <a href="#" slot="extra">
                 <Icon type="md-more" />
               </a>
+              <Tabs>
+                <TabPane label="上一篇日记" icon="ios-arrow-dropleft-circle">上一篇日记</TabPane>
+                <TabPane label="最近的日记" icon="ios-clock">标签二的内容</TabPane>
+              </Tabs>
             </Card>
           </Col>
           <Col span="8">
@@ -56,9 +60,10 @@
               <!-- 点滴日记 -->
               <div id="weather-view-he"></div>
 
-             <remote-js></remote-js>
+              <remote-js></remote-js>
               <remote-script
-                src="https://apip.weatherdt.com/view/static/js/r.js?v=1111">
+                src="https://apip.weatherdt.com/view/static/js/r.js?v=1111"
+              >
               </remote-script>
             </Card>
           </Col>
@@ -84,11 +89,10 @@ export default {
     },
     "remote-js": {
       render(createElement) {
-        var el= createElement("script", {
-          attrs: { type: "text/javascript" },
-         
+        var el = createElement("script", {
+          attrs: { type: "text/javascript" }
         });
-        el.text=`WIDGET = {ID: 'qednB1yr2E'};`
+        el.text = `WIDGET = {ID: 'qednB1yr2E'};`;
         return el;
       }
     }
@@ -96,7 +100,7 @@ export default {
   data() {
     return {
       user_email: localStorage.getItem("user_email"),
-      userName:localStorage.getItem("userName")
+      userName: localStorage.getItem("userName")
     };
   },
   mounted() {}
