@@ -3,11 +3,10 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import About from '@/components/About'
 import Index from '@/components/Index'
-import UserCenter from '@/components/home/UserCenter'
-import WriteDiary from '@/components/home/WriteDiary'
+import UserCenter from '@/views/UserCenter'
+import WriteDiary from '@/views/WriteDiary'
+import AllDiary from '@/views/AllDiary'
 Vue.use(Router)
-
-
 var router = new Router({
   mode: 'history',
   routes: [{
@@ -21,12 +20,16 @@ var router = new Router({
       path: '/index',
       component: Index,
       children: [{
-          path: '/home/userCenter',
+          path: '/userCenter',
           component: UserCenter
         },
         {
-          path: '/home/writeDiary',
+          path: '/writeDiary',
           component: WriteDiary
+        },
+        {
+          path:'/allDiary',
+          component:AllDiary
         }
       ]
     }
@@ -39,7 +42,7 @@ router.beforeEach((to, from, nex) => {
   } else if (to.path == "/index") {
     if (localStorage.getItem("token")) {
       nex({
-        path: '/home/userCenter'
+        path: '/userCenter'
       })
     } else {
       nex();

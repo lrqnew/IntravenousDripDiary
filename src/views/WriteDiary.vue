@@ -21,17 +21,17 @@
           <p slot="content">
            <Form  inline :label-width="90">
         <FormItem label="日记标题" >
-            <Input prefix="ios-paper" type="text"  placeholder="Username" clearable="true">
+            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable="true">
             </Input>
         </FormItem>
         <FormItem label="隐私设置">
-            <RadioGroup >
+            <RadioGroup v-model="formItem.radio">
                 <Radio label="open">公开</Radio>
                 <Radio label="private">私密</Radio>
             </RadioGroup>
         </FormItem>
         <FormItem label="日记标签">
-           <Input prefix="md-pricetag"  type="text"  placeholder="Username"  clearable="true" style="width: 600px">
+           <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable="true" style="width: 600px">
             </Input>
         </FormItem>
          <FormItem>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { addQuillTitle } from '../../assets/js/quill-title';
+import { addQuillTitle } from "../assets/js/quill-title";
 import { quillEditor } from "vue-quill-editor"; //调用编辑器
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
@@ -81,27 +81,27 @@ export default {
   data() {
     return {
       editorOption: {
-        
-        placeholder: '请输入编辑内容',
-            		theme: 'snow', //主题风格
-            		modules: {
-            			toolbar: {
-            				container: toolbarOptions, // 工具栏
-            				handlers: {
-            					'image': function (value) {
-            						if (value) {
-            							document.querySelector('#quill-upload input').click()
-            						} else {
-                          this.quill.format('image', false);
-                         
-            						}
-            					}
-            				}
-            			}
-            		}
-            	}, // 富文本编辑器配置
-              content: '', //富文本内容
-              
+        placeholder: "请输入编辑内容",
+        theme: "snow", //主题风格
+        modules: {
+          toolbar: {
+            container: toolbarOptions, // 工具栏
+            handlers: {
+              image: function(value) {
+                if (value) {
+                  document.querySelector("#quill-upload input").click();
+                } else {
+                  this.quill.format("image", false);
+                }
+              }
+            }
+          }
+        }
+      }, // 富文本编辑器配置
+      content: "", //富文本内容
+      formItem:{
+         radio: 'private',
+      }
     };
   },
   methods: {
@@ -112,20 +112,18 @@ export default {
     onEditorFocus() {}, // 获得焦点事件
     onEditorChange() {} // 内容改变事件
   },
-    mounted(){
-          addQuillTitle();
-          
-
-	    },
+  mounted() {
+    addQuillTitle();
+  }
 };
 </script>
-<style scoped>
+<style>
 /* .write {
   height: auto;
 } */
-.ql-editor{
-         height:400px !important;
-     }
+.ql-container{
+  height: 400px !important;
+}
 </style>
 
 

@@ -10,11 +10,11 @@
             />
           </div>
           <div class="layout-nav">
-            <MenuItem name="1" to="/home/userCenter">
+            <MenuItem name="1" to="/userCenter">
               <Icon type="md-person" />
               用户中心
             </MenuItem>
-            <MenuItem name="2" to="/home/writeDiary">
+            <MenuItem name="2" to="/writeDiary">
               <Icon type="md-create" />
               记录日记
             </MenuItem>
@@ -47,7 +47,7 @@
             width="auto"
             :open-names="['1']"
           >
-            <MenuItem name="2-1" to="/home/userCenter">
+            <MenuItem name="2-1" to="/userCenter">
               <Icon type="md-person" />
               用户中心
             </MenuItem>
@@ -57,8 +57,8 @@
                 <Icon type="md-bookmarks" />
                 我的日记本
               </template>
-              <MenuItem name="2-1" to="/home/writeDiary">记录日记</MenuItem>
-              <MenuItem name="2-2">所有日记</MenuItem>
+              <MenuItem name="2-1" to="/writeDiary">记录日记</MenuItem>
+              <MenuItem name="2-2" to="/allDiary">所有日记</MenuItem>
               <MenuItem name="2-3">日记标签</MenuItem>
             </Submenu>
             <Submenu name="3">
@@ -97,7 +97,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$router.push({ path: "/home/UserCenter" });
+    this.$router.push({ path: "/UserCenter" });
   },
   methods: {
     exit() {
