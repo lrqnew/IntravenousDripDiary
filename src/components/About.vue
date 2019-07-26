@@ -118,7 +118,7 @@ export default {
     open(){
       let token=localStorage.getItem('token');
       if(token){
-        this.$router.push({path:'/home/userCenter'})
+        this.$router.push({path:'/userCenter'})
       }else{
         this.$router.push({path:'/'});
       }

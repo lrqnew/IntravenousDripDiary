@@ -18,7 +18,7 @@
               <Icon type="md-create" />
               记录日记
             </MenuItem>
-            <MenuItem name="3">
+            <MenuItem name="3" to="/advice">
               <Icon type="md-mail-open" />
               建议
             </MenuItem>
@@ -67,14 +67,14 @@
                 我的资料
               </template>
               <MenuItem name="3-1" to="/avatar">我的头像</MenuItem>
-              <MenuItem name="3-2">个人资料</MenuItem>
+              <MenuItem name="3-2" to="/personalData">个人资料</MenuItem>
             </Submenu>
             <Submenu name="4">
               <template slot="title">
                 <Icon type="ios-unlock" />
                 安全设置
               </template>
-              <MenuItem name="4-1">密码修改</MenuItem>
+              <MenuItem name="4-1" to="changePwd">密码修改</MenuItem>
             </Submenu>
         
             

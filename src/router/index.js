@@ -8,6 +8,9 @@ import WriteDiary from '@/views/WriteDiary'
 import AllDiary from '@/views/AllDiary'
 import DiaryTags from '@/views/DiaryTags'
 import Avatar from '@/views/Avatar'
+import PersonalData from '@/views/PersonalData'
+import ChangePwd from '@/views/ChangePwd'
+import Advice from '@/views/Advice'
 Vue.use(Router)
 var router = new Router({
   mode: 'history',
@@ -40,6 +43,18 @@ var router = new Router({
         {
           path:'/avatar',
           component:Avatar
+        },
+        {
+          path:'/personalData',
+          component:PersonalData
+        },
+        {
+          path:'/changePwd',
+          component:ChangePwd
+        },
+        {
+          path:'/advice',
+          component:Advice
         }
       ]
     }
