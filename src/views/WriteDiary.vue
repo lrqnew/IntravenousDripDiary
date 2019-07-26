@@ -21,21 +21,27 @@
           <p slot="content">
            <Form  inline :label-width="90">
         <FormItem label="日记标题" >
-            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable>
+            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable v-model="dTitle">
             </Input>
         </FormItem>
         <FormItem label="隐私设置">
             <RadioGroup v-model="formItem.radio">
-                <Radio label="open">公开</Radio>
-                <Radio label="private">私密</Radio>
+                <Radio label="open" true-value="1" false-value="0" v-model="privacy" >公开</Radio>
+                <Radio label="private" true-value="0" false-value="1"  v-model="privacy">私密</Radio>
             </RadioGroup>
         </FormItem>
         <FormItem label="日记标签">
-           <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable style="width: 600px">
+           <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable v-model="tag" @keyup.enter.native="tags(tag)">
             </Input>
         </FormItem>
+       
+        
          <FormItem>
-            <Button type="primary" >发布日记</Button>
+            <Button type="primary" @click="Published">发布日记</Button>
+        </FormItem>
+         <FormItem >
+           <Tag v-if="show" closable  class="tagg"   :color="tagsColor[index]" v-for="(item,index) of dTag" :key="index" v-text="item"></Tag>
+       <Tag v-if="show" closable @on-close="handleClose">标签三</Tag>
         </FormItem>
     </Form>
           </p>
@@ -99,9 +105,16 @@ export default {
         }
       }, // 富文本编辑器配置
       content: "", //富文本内容
+      dTitle:"",//日记标题
+      dTag:[],//日记标签
+      tag:'',
+      privacy:"",
+      show: true,//日记标签显示状态
+      tagsColor:['default','primary','success','error','warning','magenta','red','volcano','orange','gold','yellow','lime','green','cyan','blue','geekblue','purple','#FFA2D3'],
       formItem: {
-        radio: "private"
-      }
+        radio:"private",//是否公开
+      },
+      
     };
   },
   methods: {
@@ -110,11 +123,31 @@ export default {
     },
     onEditorBlur() {}, // 失去焦点事件
     onEditorFocus() {}, // 获得焦点事件
-    onEditorChange() {} // 内容改变事件
+    onEditorChange() {}, // 内容改变事件
+    //发布日记
+    Published(){
+      console.log(this.content);
+      console.log(this.formItem.radio);
+      console.log(this.privacy);
+    },
+    tags(value){
+      this.tag="";
+      if(this.dTag.length<18&&value!=""){
+         this.dTag.push(value);
+      }else{
+        this.$Message.warning('日记标签不能为空和多余18个');
+      }
+    },
+    //标签关闭
+    handleClose(){
+         this.show = false;
+    }
   },
   mounted() {
     addQuillTitle();
+
   }
+
 };
 </script>
 <style>
