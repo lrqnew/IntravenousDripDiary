@@ -3,9 +3,10 @@
  */
  // 接口地址
 let url = {
-    userLogin: '/user/login', 
-    userReg:'/user/reg',
-    selectMail:'/user/selectMail'
+    userLogin: '/api/user/login', 
+    userReg:'/api/user/reg',
+    selectMail:'/api/user/selectMail',
+    writeDiary:'/api/diary/writeDiary'
     
 }
 

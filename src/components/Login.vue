@@ -358,6 +358,7 @@ export default {
               userPwd: this.loginFoemValidate.password
             })
             .then(res => {
+              console.log(res);
               if (res.code === 200) {
                 this.$Message.success("登录成功!");
                 this.$router.push({ path: "/index" });
@@ -365,6 +366,8 @@ export default {
                 localStorage.setItem("token", res.token);
                 //保存用户邮箱
                 localStorage.setItem("user_email", res.email);
+                //保存用户id
+                localStorage.setItem("userId",res.userId);
                 //保存用户名
                 localStorage.setItem("userName",res.userName);
               } else {

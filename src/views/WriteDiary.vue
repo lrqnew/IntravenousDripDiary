@@ -5,7 +5,7 @@
         <p slot="title">记录日记</p>
         <div class="edit_container">
              <quill-editor 
-            v-model="content" 
+            v-model="diary.dContent" 
             ref="myQuillEditor" 
             :options="editorOption" 
             @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
@@ -18,30 +18,27 @@
       <Collapse value="1"  simple>
         <Panel name="1">
           日记选项
-          <p slot="content">
+           <p slot="content">
            <Form  inline :label-width="90">
         <FormItem label="日记标题" >
-            <Input prefix="ios-paper" type="text"  placeholder="日记标题" clearable v-model="dTitle">
+            <Input prefix="ios-paper" type="text"  :placeholder="diary.dTitle" clearable v-model="diary.dTitle">
             </Input>
         </FormItem>
         <FormItem label="隐私设置">
             <RadioGroup v-model="formItem.radio">
-                <Radio label="open" true-value="1" false-value="0" v-model="privacy" >公开</Radio>
-                <Radio label="private" true-value="0" false-value="1"  v-model="privacy">私密</Radio>
+                <Radio label="open" true-value="1" false-value="0" v-model="diary.privacy" >公开</Radio>
+                <Radio label="private" true-value="0" false-value="1"  v-model="diary.privacy">私密</Radio>
             </RadioGroup>
         </FormItem>
         <FormItem label="日记标签">
            <Input prefix="md-pricetag"  type="text"  placeholder="日记标签"  clearable v-model="tag" @keyup.enter.native="tags(tag)">
             </Input>
         </FormItem>
-       
-        
          <FormItem>
             <Button type="primary" @click="Published">发布日记</Button>
         </FormItem>
          <FormItem >
-           <Tag v-if="show" closable  class="tagg"   :color="tagsColor[index]" v-for="(item,index) of dTag" :key="index" v-text="item"></Tag>
-       <Tag v-if="show" closable @on-close="handleClose">标签三</Tag>
+           <Tag  closable  class="tagg"  :color="tagsColor[index]" v-for="(item,index) of diary.dTag" :key="index" @on-close="handleClose" :name="item" >{{item}}</Tag>
         </FormItem>
     </Form>
           </p>
@@ -104,20 +101,47 @@ export default {
           }
         }
       }, // 富文本编辑器配置
-      content: "", //富文本内容
-      dTitle:"",//日记标题
-      dTag:[],//日记标签
-      tag:'',
-      privacy:"",
-      show: true,//日记标签显示状态
-      tagsColor:['default','primary','success','error','warning','magenta','red','volcano','orange','gold','yellow','lime','green','cyan','blue','geekblue','purple','#FFA2D3'],
-      formItem: {
-        radio:"private",//是否公开
+      diary: {
+        dContent: "", //富文本内容
+        dTitle: new Date().toLocaleDateString() + "日记", //日记标题
+        dTag: [], //日记标签
+        privacy: "0",
+        userId: localStorage.getItem("userId")
       },
-      
+      tag: "",
+      tagsColor: [
+        "default",
+        "primary",
+        "success",
+        "error",
+        "warning",
+        "magenta",
+        "red",
+        "volcano",
+        "orange",
+        "gold",
+        "yellow",
+        "lime",
+        "green",
+        "cyan",
+        "blue",
+        "geekblue",
+        "purple",
+        "#FFA2D3"
+      ],
+      formItem: {
+        radio: "private" //是否公开
+      },
+      tDayIsWrite: false
     };
   },
+
   methods: {
+    //先是把可能的空白符全部列出来，在第一次遍历中砍掉前面的空白，第二次砍掉后面的空白。
+    // 全过程只用了indexOf与substring这个专门为处理字符串而生的原生方法，没有使用到正则。
+    // 速度快得惊人，估计直逼上内部的二进制实现，并且在 IE与火狐（其他浏览器当然也毫无疑问）都有良好的表现。
+    // 速度都是零毫秒级别的。
+
     onEditorReady(editor) {
       // 准备编辑器
     },
@@ -125,29 +149,41 @@ export default {
     onEditorFocus() {}, // 获得焦点事件
     onEditorChange() {}, // 内容改变事件
     //发布日记
-    Published(){
-      console.log(this.content);
-      console.log(this.formItem.radio);
-      console.log(this.privacy);
+    Published() {
+      if (this.diary.dContent.trim()) {
+        this.request
+          .httpPost(this.requestUrl.writeDiary, this.diary)
+          .then(res => {
+            if (res.code === 200) {
+              this.tDayIsWrite = true;
+              this.$Message.success("日记发布成功!");
+              this.dContent = "";
+            } else {
+              this.$Message.error("今天已发布日记，您可以去修改！");
+            }
+          });
+        console.log(this.diary);
+      } else {
+        this.$Message.error("日记内容不能为空！");
+      }
     },
-    tags(value){
-      this.tag="";
-      if(this.dTag.length<18&&value!=""){
-         this.dTag.push(value);
-      }else{
-        this.$Message.warning('日记标签不能为空和多余18个');
+    tags(value) {
+      this.tag = "";
+      if (this.diary.dTag.length < 18 && value != "") {
+        this.diary.dTag.push(value);
+      } else {
+        this.$Message.warning("日记标签不能为空和多余18个");
       }
     },
     //标签关闭
-    handleClose(){
-         this.show = false;
+    handleClose(event, name) {
+      const index = this.diary.dTag.indexOf(name);
+      this.diary.dTag.splice(index, 1);
     }
   },
   mounted() {
     addQuillTitle();
-
   }
-
 };
 </script>
 <style>

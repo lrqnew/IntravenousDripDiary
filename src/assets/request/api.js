@@ -8,7 +8,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // 配置数据请求的基础url
 axios.defaults.baseURL =process.env.VUE_APP_BASE_API; 
 axios.defaults.withCredentials = false
-// const SUCCESS = 200 // 成功时返回的code码，根据项目的不同和后台一致规定code码，此项目使用'200'
+const SUCCESS = 200 // 成功时返回的code码，根据项目的不同和后台一致规定code码，此项目使用'200'
 
 // 请求拦截器
 axios.interceptors.request.use((config) => {
@@ -23,19 +23,10 @@ axios.interceptors.request.use((config) => {
 })
 //返回状态判断
 axios.interceptors.response.use((res) => {
-  if (res.data.code ===200) {
-    return Promise.resolve(res)
-  }else if(res.data.code===402){
-    return Promise.resolve(res)
-  }else if(res.data.code===301){
-    return Promise.resolve(res)
-  }else if(res.data.code===401){
+  if (res.status ===SUCCESS) {
     return Promise.resolve(res)
   }
   else{
-    if(res.status===200){
-      return Promise.reject(new Error(res.data.msg))
-    }
     return Promise.reject(new Error(res))
   }
   
