@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { promises } from 'fs';
-// import qs from 'qs'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+import router from '../../router'
 //  axios 配置
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8,'
@@ -24,10 +25,17 @@ axios.interceptors.request.use((config) => {
 //返回状态判断
 axios.interceptors.response.use((res) => {
   if (res.status ===SUCCESS) {
+    if(res.data.code==408){
+      console.log(router);
+      iView.Message.error(res.data.msg);
+      router.push({ path: "/" });
+      localStorage.clear();
+    }
     return Promise.resolve(res)
   }
   else{
-    return Promise.reject(new Error(res))
+    console.log(res);
+    return Promise.reject(new Error(res.status))
   }
   
 }, (error) => {
