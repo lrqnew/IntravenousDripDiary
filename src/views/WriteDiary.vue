@@ -11,10 +11,8 @@
             @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
             @change="onEditorChange($event)">
         </quill-editor>
-
         </div>
       </Card>
-
       <Collapse value="1"  simple>
         <Panel name="1">
           日记选项
@@ -47,19 +45,16 @@
     </Content>
   </Layout>
 </template>
-
 <script>
 import { addQuillTitle } from "../assets/js/quill-title";
 import { quillEditor } from "vue-quill-editor"; //调用编辑器
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
-
 // 工具栏配置
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"], // toggled buttons
   ["blockquote", "code-block"],
-
   [{ header: 1 }, { header: 2 }], // custom button values
   [{ list: "ordered" }, { list: "bullet" }],
   [{ script: "sub" }, { script: "super" }], // superscript/subscript
@@ -75,7 +70,6 @@ const toolbarOptions = [
   ["link", "image", "video"],
   ["clean"] // remove formatting button
 ];
-
 export default {
   components: {
     quillEditor
@@ -132,16 +126,9 @@ export default {
       formItem: {
         radio: "private" //是否公开
       },
-      tDayIsWrite: false
     };
   },
-
   methods: {
-    //先是把可能的空白符全部列出来，在第一次遍历中砍掉前面的空白，第二次砍掉后面的空白。
-    // 全过程只用了indexOf与substring这个专门为处理字符串而生的原生方法，没有使用到正则。
-    // 速度快得惊人，估计直逼上内部的二进制实现，并且在 IE与火狐（其他浏览器当然也毫无疑问）都有良好的表现。
-    // 速度都是零毫秒级别的。
-
     onEditorReady(editor) {
       // 准备编辑器
     },
@@ -155,7 +142,6 @@ export default {
           .httpPost(this.requestUrl.writeDiary, this.diary)
           .then(res => {
             if (res.code === 200) {
-              this.tDayIsWrite = true;
               this.$Message.success("日记发布成功!");
               this.dContent = "";
             } else {
