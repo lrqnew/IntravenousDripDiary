@@ -36,7 +36,7 @@
             <Button type="primary" @click="Published">发布日记</Button>
         </FormItem>
          <FormItem >
-           <Tag  closable  class="tagg"  :color="tagsColor[index]" v-for="(item,index) of diary.dTag" :key="index" @on-close="handleClose" :name="item" >{{item}}</Tag>
+           <Tag type="border"   closable  class="tagg"  :color="tagsColor[index]" v-for="(item,index) of diary.dTag" :key="index" @on-close="handleClose" :name="item" >{{item}}</Tag>
         </FormItem>
     </Form>
           </p>
@@ -104,7 +104,6 @@ export default {
       },
       tag: "",
       tagsColor: [
-        "default",
         "primary",
         "success",
         "error",

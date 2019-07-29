@@ -9,7 +9,9 @@ let url = {
     writeDiary:'/api/diary/writeDiary',
     pushAdvice:'/api/advice/pushAdvice',
     selectDiary:'/api/diary/selectDiary',
-    diaryDetails:'/api/diary/diaryDetails'
+    diaryDetails:'/api/diary/diaryDetails',
+    diaryTags:'/api/diary/diaryTags',
+    dateDiary:'/api/diary/dateDiary'
     
 }
 

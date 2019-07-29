@@ -5,24 +5,7 @@
         <p slot="title">日记标签 Tags</p>
         <i>所有日记的标签,点击标签浏览相关联日记.</i>
         <div class="tags">
-          <Tag color="default">default</Tag>
-          <Tag color="primary">primary</Tag>
-          <Tag color="success">success</Tag>
-          <Tag color="error">error</Tag>
-          <Tag color="warning">warning</Tag>
-          <Tag color="magenta">magenta</Tag>
-          <Tag color="red">red</Tag>
-          <Tag color="volcano">volcano</Tag>
-          <Tag color="orange">orange</Tag>
-          <Tag color="gold">gold</Tag>
-          <Tag color="yellow">yellow</Tag>
-          <Tag color="lime">lime</Tag>
-          <Tag color="green">green</Tag>
-          <Tag color="cyan">cyan</Tag>
-          <Tag color="blue">blue</Tag>
-          <Tag color="geekblue">geekblue</Tag>
-          <Tag color="purple">purple</Tag>
-          <Tag color="#FFA2D3">Custom Color</Tag>
+          <Tag  :color="tagsColor[index]" v-for="(item,index) of dTags" :key="index" v-text="item"></Tag>
         </div>
       </Card>
     </Content>
@@ -33,7 +16,42 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      userId:localStorage.getItem("userId"),
+      dTags:[],
+       tagsColor: [
+        "primary",
+        "success",
+        "error",
+        "warning",
+        "magenta",
+        "red",
+        "volcano",
+        "orange",
+        "gold",
+        "yellow",
+        "lime",
+        "green",
+        "cyan",
+        "blue",
+        "geekblue",
+        "purple",
+        "#FFA2D3"
+      ],
+    };
+  },
+  created(){
+    this.selectTags();
+  },
+  methods:{
+    selectTags(){
+      this.request.httpGet(this.requestUrl.diaryTags,{userId:this.userId}).then(res=>{
+        res.forEach((element,i) => {
+         this.dTags.push(...element.dTag.split(","));
+        });
+       
+      })
+    }
   }
 };
 </script>
