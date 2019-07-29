@@ -7,7 +7,8 @@ let url = {
     userReg:'/api/user/reg',
     selectMail:'/api/user/selectMail',
     writeDiary:'/api/diary/writeDiary',
-    pushAdvice:'/api/advice/pushAdvice'
+    pushAdvice:'/api/advice/pushAdvice',
+    selectDiary:'/api/diary/selectDiary'
     
 }
 

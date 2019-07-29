@@ -48,9 +48,20 @@
               <a href="#" slot="extra">
                 <Icon type="md-more" />
               </a>
-              <Tabs>
-                <TabPane label="上一篇日记" icon="ios-arrow-dropleft-circle">上一篇日记</TabPane>
-                <TabPane label="最近的日记" icon="ios-clock">标签二的内容</TabPane>
+              <Tabs name="1" @on-click="selectDiary">
+                <TabPane label="上一篇日记" name="1" icon="ios-arrow-dropleft-circle" >
+                   <div class="prev" v-for="(item,index) of diaryList" :key="index" >
+                     <h4 v-text="item.dTitle"></h4>
+                     <p v-html="item.dContent"></p>
+                   </div>
+                </TabPane>
+                <TabPane label="最近的日记" name="5" icon="ios-clock" >
+                  <div >
+                      <CellGroup>
+                         <Cell v-for="(item,index) of diaryList" :key="index"  extra="浏览" :title="item.dTitle" to="/" />
+                       </CellGroup>
+                  </div>
+                </TabPane>
               </Tabs>
             </Card>
           </Col>
@@ -100,10 +111,27 @@ export default {
   data() {
     return {
       user_email: localStorage.getItem("user_email"),
-      userName: localStorage.getItem("userName")
+      userName: localStorage.getItem("userName"),
+      diaryQuery:{
+         pno:0,
+         pageSize:3,
+         userId:localStorage.getItem("userId")
+      },
+      diaryList:[],
     };
   },
-  mounted() {}
+  created(){
+    this.selectDiary(1);
+  },
+  methods:{
+   selectDiary(size){
+      this.diaryQuery.pageSize=size;
+      this.request.httpGet(this.requestUrl.selectDiary,this.diaryQuery).then(res=>{
+        this.diaryList=res.data;
+      })
+   }
+  },
+ 
 };
 </script>
 <style scoped>
@@ -141,6 +169,10 @@ h3 > .uemai {
 .content_bot {
   margin-top: 20px;
   width: 100%;
+}
+.prev h4{
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 </style>
 
