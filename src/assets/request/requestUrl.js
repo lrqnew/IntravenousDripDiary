@@ -8,7 +8,8 @@ let url = {
     selectMail:'/api/user/selectMail',
     writeDiary:'/api/diary/writeDiary',
     pushAdvice:'/api/advice/pushAdvice',
-    selectDiary:'/api/diary/selectDiary'
+    selectDiary:'/api/diary/selectDiary',
+    diaryDetails:'/api/diary/diaryDetails'
     
 }
 

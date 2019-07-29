@@ -11,6 +11,7 @@ import Avatar from '@/views/Avatar'
 import PersonalData from '@/views/PersonalData'
 import ChangePwd from '@/views/ChangePwd'
 import Advice from '@/views/Advice'
+import DiaryDetails from '@/views/DiaryDetails'
 Vue.use(Router)
 var router = new Router({
   mode: 'history',
@@ -55,6 +56,10 @@ var router = new Router({
         {
           path:'/advice',
           component:Advice
+        },
+        {
+          path:'/diaryDetails/:id',
+          component:DiaryDetails
         }
       ]
     }

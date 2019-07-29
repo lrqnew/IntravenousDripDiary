@@ -43,7 +43,7 @@
       <div class="content_bot">
         <Row>
           <Col span="16">
-            <Card style="width:95%;height:400px;" dis-hover :bordered="false">
+            <Card style="width:95%;min-height:400px;" dis-hover :bordered="false">
               <p slot="title"><Icon type="md-create" />日记概览</p>
               <a href="#" slot="extra">
                 <Icon type="md-more" />
@@ -57,8 +57,8 @@
                 </TabPane>
                 <TabPane label="最近的日记" name="5" icon="ios-clock" >
                   <div >
-                      <CellGroup>
-                         <Cell v-for="(item,index) of diaryList" :key="index"  extra="浏览" :title="item.dTitle" to="/" />
+                      <CellGroup >
+                         <Cell v-for="(item,index) of diaryList" :key="index"  extra="浏览" :title="item.dTitle" :to="`/diaryDetails/${item.dId}`"/>
                        </CellGroup>
                   </div>
                 </TabPane>
@@ -129,11 +129,21 @@ export default {
       this.request.httpGet(this.requestUrl.selectDiary,this.diaryQuery).then(res=>{
         this.diaryList=res.data;
       })
+   },
+   goDetails(id){
+     this.$router.push({path:"/diaryDetails"})
    }
   },
  
 };
 </script>
+<style>
+iframe{
+  width: 100% !important;
+  height: 400px;
+}
+</style>
+
 <style scoped>
 h3 {
   margin: 20px;
@@ -173,7 +183,9 @@ h3 > .uemai {
 .prev h4{
   font-weight: bold;
   margin-bottom: 10px;
+  border: none;
 }
+
 </style>
 
 

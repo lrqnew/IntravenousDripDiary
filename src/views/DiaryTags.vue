@@ -40,6 +40,7 @@ export default {
 <style scoped>
 .tags{
     margin-top: 10px;
+    min-height: 400px;
 }
 </style>
 
