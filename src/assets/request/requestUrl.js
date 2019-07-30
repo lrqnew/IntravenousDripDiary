@@ -11,7 +11,8 @@ let url = {
     selectDiary:'/api/diary/selectDiary',
     diaryDetails:'/api/diary/diaryDetails',
     diaryTags:'/api/diary/diaryTags',
-    dateDiary:'/api/diary/dateDiary'
+    dateDiary:'/api/diary/dateDiary',
+    delDiary:'/api/diary/delDiary'
     
 }
 

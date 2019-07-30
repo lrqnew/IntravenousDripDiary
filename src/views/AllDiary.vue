@@ -16,7 +16,7 @@
                   style="width: 200px"
                   v-model="date"
                   format="yyyy-MM-dd"
-                  @on-change='handleChange'
+                  @on-change="handleChange"
                 ></DatePicker>
               </Col>
             </Row>
@@ -26,31 +26,56 @@
             <Button type="primary" @click="selectByDate">查询</Button>
           </FormItem>
           <FormItem>
-            <Button type="primary">所有日记({{ diaryCount }})</Button>
+            <Button type="primary" @click="selectDiary"
+              >所有日记({{ diaryCount }})</Button
+            >
           </FormItem>
           <FormItem>
             <Button type="error" to="/writeDiary">写日记</Button>
           </FormItem>
         </Form>
-        <Table size="small" :columns="columns" :data="data">
+        <Table size="small" :columns="columns" :data="data" :loading="loading">
           <template slot-scope="{ row, index }" slot="action">
             <Button
               icon="ios-create-outline"
               type="primary"
               size="small"
               style="margin-right: 5px"
-              @click="show(index)"
+              @click="show(row)"
               >编辑</Button
             >
             <Button
               icon="ios-trash-outline"
               type="error"
               size="small"
-              @click="remove(index)"
+              @click="(modal = true), (dId = row.dId)"
               >删除</Button
             >
           </template>
         </Table>
+
+        <Modal v-model="modal" width="360">
+          <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="ios-information-circle"></Icon>
+            <span>删除确认</span>
+          </p>
+          <div style="text-align:center">
+            <p>
+              删除此日记后，将永久无法恢复！
+            </p>
+            <p>是否继续删除？</p>
+          </div>
+          <div slot="footer">
+            <Button
+              type="error"
+              size="large"
+              long
+              :loading="modal_loading"
+              @click="remove()"
+              >删除</Button
+            >
+          </div>
+        </Modal>
       </Card>
     </Content>
   </Layout>
@@ -61,7 +86,10 @@ export default {
   components: {},
   data() {
     return {
-       date:[],
+      loading: true,
+      modal: false,
+      modal_loading: false,
+      date: [],
       //日期选择器
       options: {
         shortcuts: [
@@ -96,7 +124,7 @@ export default {
       },
       diaryQuery: {
         pno: 0,
-        pageSize: 3,
+        pageSize: 6,
         userId: localStorage.getItem("userId")
       },
       diaryCount: "",
@@ -111,14 +139,13 @@ export default {
           title: "时间",
           key: "writeDate",
           render: (h, params) => {
-            var dateMat=new Date(params.row.writeDate);
+            var dateMat = new Date(params.row.writeDate);
             var year = dateMat.getFullYear();
             var month = dateMat.getMonth() + 1;
             var day = dateMat.getDate();
-            var date=year + "-" + month + "-" + day
-            // return year + "-" + month + "-" + day;
-            return h('div',[date])
-         }
+            var date = year + "-" + month + "-" + day;
+            return h("div", [date]);
+          }
         },
         {
           title: "操作",
@@ -126,53 +153,65 @@ export default {
           align: "center"
         }
       ],
-      data: []
+      data: [],
+      dId: ""
     };
   },
   methods: {
-    show(index) {
-      this.$Modal.info({
-        title: "User Info",
-        content: `Name：${this.data[index].name}<br>Age：${this.data[index].age}<br>Address：${this.data[index].address}`
-      });
+    show(row) {
+      console.log(row.dId);
     },
-    remove(index) {
-      this.data.splice(index, 1);
+    // remove(index) {
+    //   this.modal = true;
+    // },
+    remove() {
+      this.modal_loading = true;
+      setTimeout(() => {
+        this.modal_loading = false;
+        this.modal = false;
+        this.request
+          .httpDelete(this.requestUrl.delDiary, {
+            dId: this.dId,
+            userId: this.diaryQuery.userId
+          })
+          .then(res => {
+            if (res.code === 200) {
+              this.selectDiary();
+              this.$Message.success("删除成功");
+            }
+          });
+      }, 1000);
     },
     selectDiary() {
       this.request
         .httpGet(this.requestUrl.selectDiary, this.diaryQuery)
         .then(res => {
+          this.loading=false;
           this.data = res.data;
           this.diaryCount = res.count;
         });
     },
     //根据时间查询日记
-    selectByDate(){
-      console.log(this.date)
-       var startDate=this.date[0];
-       var endDate=this.date[1];
-       this.request.httpGet(this.requestUrl.dateDiary,{startDate:startDate,endDate:endDate}).then(res=>{
-         console.log(res);
-       })
+    selectByDate() {
+      var startDate = this.date[0];
+      var endDate = this.date[1];
+      this.request
+        .httpGet(this.requestUrl.dateDiary, {
+          startDate: startDate,
+          endDate: endDate,
+          userId: this.diaryQuery.userId
+        })
+        .then(res => {
+          this.data = res;
+        });
     },
-    handleChange(daterange){
-      this.date=daterange;
+    handleChange(daterange) {
+      this.date = daterange;
     }
   },
   created() {
     this.selectDiary();
-  },
-formatDate: function(value) {
-    var dateMat = new Date(
-      parseInt(value.replace("/Date(", "").replace(")/", ""), 10)
-    );
-    var year = dateMat.getFullYear();
-    var month = dateMat.getMonth() + 1;
-    var day = dateMat.getDate();
-    return year + "-" + month + "-" + day;
   }
-  
 };
 </script>
 <style scoped>

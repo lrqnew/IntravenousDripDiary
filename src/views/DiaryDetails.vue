@@ -3,14 +3,19 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title" v-text="dTitle"></p>
-        <div v-html="dContent">
-        </div>
+        <div v-html="dContent"></div>
         <p class="tag">
-           <Icon type="ios-pricetags" style="margin-right:20px;"/>
-           <Tag type="border" :color="tagsColor[index]" v-for="(item,index) of dTag" :key="index" v-text="item"></Tag>
+          <Icon type="ios-pricetags" style="margin-right:20px;" />
+          <Tag
+            :color="tagsColor[index]"
+            v-for="(item, index) of dTag"
+            :key="index"
+            v-text="item"
+          ></Tag>
+          <i style="float:right" v-text="writeDate"></i>
         </p>
       </Card>
-    </Content>
+    </Content>                 
   </Layout>
 </template>
 
@@ -19,10 +24,11 @@ export default {
   components: {},
   data() {
     return {
-      userId:localStorage.getItem("userId"),
-      dTitle:'',
-      dContent:'',
-      dTag:[],
+      userId: localStorage.getItem("userId"),
+      dTitle: "",
+      dContent: "",
+      dTag: [],
+      writeDate: "",
       tagsColor: [
         "primary",
         "success",
@@ -41,35 +47,46 @@ export default {
         "geekblue",
         "purple",
         "#FFA2D3"
-      ],
+      ]
     };
   },
-  created(){
+  created() {
     this.diaryDetails();
   },
-  methods:{
+  methods: {
     //根据id查询用户日记内容
-    diaryDetails(){
-      var did=this.$route.params.id;
-      this.request.httpGet(this.requestUrl.diaryDetails,{dId:did,userId:this.userId}).then(res=>{
-        this.dTitle=res[0].dTitle;
-        this.dContent=res[0].dContent;
-        this.dTag=res[0].dTag.split(",");
-        console.log(res);
-        console.log(this.dTag);
-      })
+    diaryDetails() {
+      var did = this.$route.params.id;
+      this.request
+        .httpGet(this.requestUrl.diaryDetails, {
+          dId: did,
+          userId: this.userId
+        })
+        .then(res => {
+          this.dTitle = res[0].dTitle;
+          this.dContent = res[0].dContent;
+          this.dTag = res[0].dTag.split(",");
+          this.writeDate =this.formateDate(res[0].writeDate);
+        });
+    },
+    formateDate(value) {
+      var dateMat = new Date(value);
+      var year = dateMat.getFullYear();
+      var month = dateMat.getMonth() + 1;
+      var day = dateMat.getDate();
+      var date = year + "-" + month + "-" + day;
+      return date;
     }
   }
 };
 </script>
 <style scoped>
-.tags{
-    margin-top: 10px;
+.tags {
+  margin-top: 10px;
 }
-.tag{
+.tag {
   margin-top: 50px;
 }
-
 </style>
 
 

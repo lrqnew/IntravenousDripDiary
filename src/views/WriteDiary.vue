@@ -142,12 +142,13 @@ export default {
           .then(res => {
             if (res.code === 200) {
               this.$Message.success("日记发布成功!");
-              this.dContent = "";
+              this.diary.dContent = "";
+              this.diary.dTitle="";
+              this.diary.dTag=[];
             } else {
               this.$Message.error("今天已发布日记，您可以去修改！");
             }
           });
-        console.log(this.diary);
       } else {
         this.$Message.error("日记内容不能为空！");
       }
