@@ -1,6 +1,6 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
-    <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
+    <Content :style="{ padding: '24px', minHeight: '500px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">我的日记本</p>
         <i>搜索、浏览、删除我的日记</i>
@@ -53,6 +53,16 @@
             >
           </template>
         </Table>
+        <div class="page">
+          <Page
+            :total="diaryCount"
+            :page-size="diaryQuery.pageSize"
+            :page-size-opts="diaryQuery.pageSizeOpts"
+            @on-change="pageChange"
+            @on-page-size-change="pageSizeChange"
+            show-sizer
+          />
+        </div>
 
         <Modal v-model="modal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
@@ -124,10 +134,11 @@ export default {
       },
       diaryQuery: {
         pno: 0,
-        pageSize: 6,
-        userId: localStorage.getItem("userId")
+        pageSize:5,
+        userId: localStorage.getItem("userId"),
+        pageSizeOpts: [5, 10, 15]
       },
-      diaryCount: "",
+      diaryCount:1,
       //表格数据
       columns: [
         {
@@ -154,16 +165,26 @@ export default {
         }
       ],
       data: [],
-      dId: ""
+      dId: "",
+      //分页属性
+   
     };
   },
   methods: {
+    pageChange(pno) {
+      this.diaryQuery.pno = pno - 1;
+      this.selectDiary();
+    },
+    pageSizeChange(pageSize){
+      this.diaryQuery.pageSize = pageSize;
+      this.selectDiary();
+      console.log(pageSize);
+    },
+
     show(row) {
       console.log(row.dId);
     },
-    // remove(index) {
-    //   this.modal = true;
-    // },
+    //删除日记
     remove() {
       this.modal_loading = true;
       setTimeout(() => {
@@ -182,11 +203,13 @@ export default {
           });
       }, 1000);
     },
+    //查询所有日记
     selectDiary() {
       this.request
         .httpGet(this.requestUrl.selectDiary, this.diaryQuery)
         .then(res => {
-          this.loading=false;
+          console.log(res);
+          this.loading = false;
           this.data = res.data;
           this.diaryCount = res.count;
         });
@@ -202,7 +225,9 @@ export default {
           userId: this.diaryQuery.userId
         })
         .then(res => {
+          console.log(res);
           this.data = res;
+          this.loading = false;
         });
     },
     handleChange(daterange) {
@@ -210,11 +235,28 @@ export default {
     }
   },
   created() {
-    this.selectDiary();
+    var kwd = this.$route.query.kwd;
+    if (kwd) {
+      this.request
+        .httpGet(this.requestUrl.selectagDiary, {
+          kwd: kwd,
+          userId: this.diaryQuery.userId
+        })
+        .then(res => {
+          this.data = res;
+          this.loading = false;
+        });
+    } else {
+      this.selectDiary();
+    }
   }
 };
 </script>
 <style scoped>
+.page {
+  margin-top: 20px;
+  /* float: right; */
+}
 </style>
 
 

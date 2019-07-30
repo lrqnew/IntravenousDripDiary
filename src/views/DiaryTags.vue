@@ -5,7 +5,13 @@
         <p slot="title">日记标签 Tags</p>
         <i>所有日记的标签,点击标签浏览相关联日记.</i>
         <div class="tags">
-          <Tag  :color="tagsColor[index]" v-for="(item,index) of dTags" :key="index" v-text="item"></Tag>
+          <Tag
+            :color="tagsColor[index]"
+            v-for="(item, index) of dTags"
+            :key="index"
+            v-text="item"
+            @click.native="selectagDiary(item)"
+          ></Tag>
         </div>
       </Card>
     </Content>
@@ -17,9 +23,9 @@ export default {
   components: {},
   data() {
     return {
-      userId:localStorage.getItem("userId"),
-      dTags:[],
-       tagsColor: [
+      userId: localStorage.getItem("userId"),
+      dTags: [],
+      tagsColor: [
         "primary",
         "success",
         "error",
@@ -37,28 +43,35 @@ export default {
         "geekblue",
         "purple",
         "#FFA2D3"
-      ],
+      ]
     };
   },
-  created(){
+  created() {
     this.selectTags();
   },
-  methods:{
-    selectTags(){
-      this.request.httpGet(this.requestUrl.diaryTags,{userId:this.userId}).then(res=>{
-        res.forEach((element,i) => {
-         this.dTags.push(...element.dTag.split(","));
+  methods: {
+    selectTags() {
+      this.request
+        .httpGet(this.requestUrl.diaryTags, { userId: this.userId })
+        .then(res => {
+          res.forEach((element, i) => {
+            this.dTags.push(...element.dTag.split(","));
+          });
         });
-       
-      })
+    },
+    selectagDiary(tagName) {
+      this.$router.push({path:'/allDiary',query:{kwd:tagName}})
+      // this.request.httpGet(this.requestUrl.selectagDiary,{kwd:tagName,userId:this.userId}).then(res=>{
+      //   this.$router.push({path:'/allDiary',query:{data:res}})
+      // })
     }
   }
 };
 </script>
 <style scoped>
-.tags{
-    margin-top: 10px;
-    min-height: 400px;
+.tags {
+  margin-top: 10px;
+  min-height: 400px;
 }
 </style>
 
