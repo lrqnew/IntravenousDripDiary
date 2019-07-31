@@ -3,6 +3,7 @@
     <h3 class="uname">
       {{ userName == "null" ? "" : userName }}
       <span class="uemai">{{ user_email }}</span>
+      <span class="signs">{{ signs }}</span>
       <router-link to="/personalData">
         <Icon class="userSet" type="ios-cog-outline" size="22" />
       </router-link>
@@ -14,28 +15,28 @@
           <Col span="6">
             <Card>
               <div style="text-align:center">
-                A high quality UI Toolkit based on Vue.js
+               <h3>共记录字符1330个</h3>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
               <div style="text-align:center">
-                A high quality UI Toolkit based on Vue.js
+                 <h3>共记录日记50篇</h3>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
               <div style="text-align:center">
-                A high quality UI Toolkit based on Vue.js
+                 <h3>注册30天</h3>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
               <div style="text-align:center">
-                A high quality UI Toolkit based on Vue.js
+                <h3>共有日记标签35个</h3>
               </div>
             </Card>
           </Col>
@@ -112,6 +113,7 @@
 </template>
 
 <script>
+import { userInfo } from 'os';
 export default {
   components: {
     //创建script标签组件
@@ -137,12 +139,13 @@ export default {
   },
   data() {
     return {
-      user_email: localStorage.getItem("user_email"),
-      userName: localStorage.getItem("userName"),
+      user_email:JSON.parse(localStorage.getItem("userInfo")).email ,
+      userName: JSON.parse(localStorage.getItem("userInfo")).userName,
+      signs:JSON.parse(localStorage.getItem("userInfo")).signs,
       diaryQuery: {
         pno: 0,
         pageSize: 3,
-        userId: localStorage.getItem("userId")
+        userId: JSON.parse(localStorage.getItem("userInfo")).userId
       },
       diaryList: []
     };
@@ -180,6 +183,11 @@ h3 {
 h3 > .uemai {
   color: #c4c4c4;
   font-size: 1.5rem;
+}
+.signs{
+  padding-left: 20px;
+  font-size: 1.5rem;
+  color:#2db7f5 ;
 }
 .userSet {
   margin-left: 10px;

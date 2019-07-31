@@ -42,7 +42,7 @@
           :columns="columns"
           :data="data"
           :loading="loading"
-          @on-row-click="diartDetails"
+          @on-row-dblclick="diartDetails"
         >
           <template slot-scope="{ row, index }" slot="action">
             <Button
@@ -142,14 +142,14 @@ export default {
       diaryQuery: {
         pno: 0,
         pageSize: 5,
-        userId: localStorage.getItem("userId"),
+        userId: JSON.parse(localStorage.getItem("userInfo")).userId,
         pageSizeOpts: [5, 10, 15]
       },
       diaryCount: 1,
       //表格数据
       columns: [
         {
-          title: "日记标题",
+          title: "日记标题(双击查看)",
           key: "dTitle",
           width: 900
         },
@@ -188,11 +188,11 @@ export default {
     pageSizeChange(pageSize) {
       this.diaryQuery.pageSize = pageSize;
       this.selectDiary();
-      console.log(pageSize);
     },
 
-    show(row) {
-      console.log(row.dId);
+    show(show) {
+     
+       console.log(this.date)
     },
     //删除日记
     remove() {
@@ -218,7 +218,6 @@ export default {
       this.request
         .httpGet(this.requestUrl.selectDiary, this.diaryQuery)
         .then(res => {
-          console.log(res);
           this.loading = false;
           this.data = res.data;
           this.diaryCount = res.count;
@@ -235,7 +234,6 @@ export default {
           userId: this.diaryQuery.userId
         })
         .then(res => {
-          console.log(res);
           this.data = res;
           this.loading = false;
         });

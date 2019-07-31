@@ -104,7 +104,7 @@ export default {
         dTitle: new Date().toLocaleDateString() + "日记", //日记标题
         dTag: [], //日记标签
         privacy: "0",
-        userId: localStorage.getItem("userId")
+        userId: JSON.parse(localStorage.getItem("userInfo")).userId
       },
       tag: "",
       tagsColor: [

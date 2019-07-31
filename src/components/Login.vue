@@ -205,7 +205,7 @@
             <p>
               <strong>拿出手机扫一扫</strong>
             </p>
-            <p>访问零点日记手机版</p>
+            <p>访问点滴日记手机版</p>
             <p>&nbsp;</p>
           </div>
         </div>
@@ -358,18 +358,19 @@ export default {
               userPwd: this.loginFoemValidate.password
             })
             .then(res => {
-              console.log(res);
               if (res.code === 200) {
                 this.$Message.success("登录成功!");
                 this.$router.push({ path: "/index" });
                 //保存token
                 localStorage.setItem("token", res.token);
-                //保存用户邮箱
-                localStorage.setItem("user_email", res.email);
-                //保存用户id
-                localStorage.setItem("userId",res.userId);
-                //保存用户名
-                localStorage.setItem("userName",res.userName);
+                //保存用户信息
+                localStorage.setItem("userInfo",JSON.stringify(res.userInfo[0]));
+                // //保存用户邮箱
+                // localStorage.setItem("user_email", res.userInfo[0].email);
+                // //保存用户id
+                // localStorage.setItem("userId",res.userInfo[0].userId);
+                // //保存用户名
+                // localStorage.setItem("userName",res.userInfo[0].userName);
               } else {
                 this.$Message.error("邮箱或密码错误!");
               }

@@ -12,7 +12,7 @@
           <Form :model="formItem" :label-width="40" label-position="left">
             <FormItem label="昵称">
               <Input 
-                v-model="formItem.input"
+                v-model="formItem.userName"
                 placeholder="请输入您的昵称"
               ></Input>
             </FormItem>
@@ -20,25 +20,27 @@
               <DatePicker
                 type="date"
                 placeholder="请选择您的生日"
-                v-model="formItem.date"
+                format="yyyy-MM-dd"
+                v-model="formItem.birthday"
+                @on-change="getBirthday"
               ></DatePicker>
             </FormItem>
             <FormItem label="性别">
-              <RadioGroup v-model="formItem.radio">
-                <Radio label="male">男 Male</Radio>
-                <Radio label="female">女 Female</Radio>
+              <RadioGroup v-model="formItem.sex">
+                <Radio label="1" true-value="1" false-value="0" v-model="formItem.sex">男 Male</Radio>
+                <Radio label="0" true-value="0" false-value="1" v-model="formItem.sex">女 Female</Radio>
               </RadioGroup>
             </FormItem>
             <FormItem label="签名">
               <Input 
-                v-model="formItem.textarea"
+                v-model="formItem.signs"
                 type="textarea"
                 :autosize="{ minRows: 2, maxRows: 5 }"
                 placeholder="请输入您的签名"
               ></Input>
             </FormItem>
             <FormItem>
-              <Button type="primary">保存</Button>
+              <Button type="primary" @click="save()">保存</Button>
             </FormItem>
           </Form>
         </div>
@@ -53,15 +55,11 @@ export default {
   data() {
     return {
       formItem: {
-        input: "",
-        select: "",
-        radio: "male",
-        checkbox: [],
-        switch: true,
-        date: "",
-        time: "",
-        slider: [20, 50],
-        textarea: ""
+        userName: JSON.parse(localStorage.getItem("userInfo")).userName,
+        sex:"1",
+        birthday:JSON.parse(localStorage.getItem("userInfo")).birthday,
+        signs:JSON.parse(localStorage.getItem("userInfo")).signs,
+        userId:JSON.parse(localStorage.getItem("userInfo")).userId
       }
     };
   },
@@ -69,6 +67,23 @@ export default {
      //返回上一页
     peve() {
       this.$router.go(-1);
+    },
+    getBirthday(date){
+      this.formItem.birthday=date;
+    },
+    //保存
+    save(){
+       var user= JSON.parse(localStorage.getItem("userInfo"));
+       user.userName=this.formItem.userName;
+       user.signs=this.formItem.signs;
+       localStorage.setItem("userInfo",JSON.stringify(user));
+      //  localStorage.setItem('userInfo',this.formItem.userName);
+      //  localStorage.setItem('signs',);
+       this.request.httpPut(this.requestUrl.updateUser,this.formItem).then(res=>{
+        if(res.code===200){
+          this.$Message.success('修改成功');
+        }
+       })
     }
   }
 };

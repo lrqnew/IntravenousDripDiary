@@ -28,7 +28,7 @@ export default {
   components: {},
   data() {
     return {
-      userId: localStorage.getItem("userId"),
+      userId: JSON.parse(localStorage.getItem("userInfo")).userId,
       dTitle: "",
       dContent: "",
       dTag: [],

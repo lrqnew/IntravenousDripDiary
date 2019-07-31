@@ -43,7 +43,6 @@ export default {
   methods:{
     pushAdvice(){
       if(this.adContent.trim()){
-
         this.request
           .httpPost(this.requestUrl.pushAdvice,{adContent:this.adContent} )
           .then(res => {
