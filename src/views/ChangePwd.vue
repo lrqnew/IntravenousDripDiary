@@ -3,6 +3,10 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">修改密码</p>
+         <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <i>为了您的账户安全,请您定期修改账户密码.</i>
         <div class="forms">
           <Form :model="formItem" :label-width="60" label-position="left">
@@ -42,6 +46,12 @@ export default {
         textarea: ""
       }
     };
+  },
+  methods:{
+     //返回上一页
+    peve() {
+      this.$router.go(-1);
+    }
   }
 };
 </script>

@@ -3,7 +3,9 @@
     <h3 class="uname">
       {{ userName == "null" ? "" : userName }}
       <span class="uemai">{{ user_email }}</span>
-      <Icon class="userSet" type="ios-cog-outline" size="22" />
+      <router-link to="/personalData">
+        <Icon class="userSet" type="ios-cog-outline" size="22" />
+      </router-link>
     </h3>
     <Content :style="{ padding: '24px', minHeight: '280px' }">
       <!-- 内容统计面板 -->
@@ -43,23 +45,48 @@
       <div class="content_bot">
         <Row>
           <Col span="16">
-            <Card style="width:95%;min-height:400px;" dis-hover :bordered="false">
+            <Card
+              style="width:95%;min-height:400px;"
+              dis-hover
+              :bordered="false"
+            >
               <p slot="title"><Icon type="md-create" />日记概览</p>
               <a href="#" slot="extra">
-                <Icon type="md-more" />
+                <Poptip title="操作" placement="bottom-end">
+                  <div slot="content" class="shortcuts">
+                    <p><router-link to="/writeDiary">写日记</router-link></p>
+                    <p><router-link to="/allDiary">所有日记</router-link></p>
+                    <p><router-link to="/diaryTags">日记标签</router-link></p>
+                  </div>
+                  <Icon type="md-more" />
+                </Poptip>
               </a>
               <Tabs name="1" @on-click="selectDiary">
-                <TabPane label="上一篇日记" name="1" icon="ios-arrow-dropleft-circle" >
-                   <div class="prev" v-for="(item,index) of diaryList" :key="index" >
-                     <h4 v-text="item.dTitle"></h4>
-                     <p v-html="item.dContent"></p>
-                   </div>
+                <TabPane
+                  label="上一篇日记"
+                  name="1"
+                  icon="ios-arrow-dropleft-circle"
+                >
+                  <div
+                    class="prev"
+                    v-for="(item, index) of diaryList"
+                    :key="index"
+                  >
+                    <h4 v-text="item.dTitle"></h4>
+                    <p v-html="item.dContent"></p>
+                  </div>
                 </TabPane>
-                <TabPane label="最近的日记" name="5" icon="ios-clock" >
-                  <div >
-                      <CellGroup >
-                         <Cell v-for="(item,index) of diaryList" :key="index"  extra="浏览" :title="item.dTitle" :to="`/diaryDetails/${item.dId}`"/>
-                       </CellGroup>
+                <TabPane label="最近的日记" name="5" icon="ios-clock">
+                  <div>
+                    <CellGroup>
+                      <Cell
+                        v-for="(item, index) of diaryList"
+                        :key="index"
+                        extra="浏览"
+                        :title="item.dTitle"
+                        :to="`/diaryDetails/${item.dId}`"
+                      />
+                    </CellGroup>
                   </div>
                 </TabPane>
               </Tabs>
@@ -112,33 +139,35 @@ export default {
     return {
       user_email: localStorage.getItem("user_email"),
       userName: localStorage.getItem("userName"),
-      diaryQuery:{
-         pno:0,
-         pageSize:3,
-         userId:localStorage.getItem("userId")
+      diaryQuery: {
+        pno: 0,
+        pageSize: 3,
+        userId: localStorage.getItem("userId")
       },
-      diaryList:[],
+      diaryList: []
     };
   },
-  created(){
+  created() {
     this.selectDiary(1);
   },
-  methods:{
-   selectDiary(size){
-      this.diaryQuery.pageSize=size;
-      this.request.httpGet(this.requestUrl.selectDiary,this.diaryQuery).then(res=>{
-        this.diaryList=res.data;
-      })
-   },
-   goDetails(id){
-     this.$router.push({path:"/diaryDetails"})
-   }
-  },
- 
+  methods: {
+    selectDiary(size) {
+      this.diaryQuery.pageSize = size;
+      this.request
+        .httpGet(this.requestUrl.selectDiary, this.diaryQuery)
+        .then(res => {
+          this.diaryList = res.data;
+        });
+    },
+    goDetails(id) {
+      this.$router.push({ path: "/diaryDetails" });
+    },
+     
+  }
 };
 </script>
 <style>
-iframe{
+iframe {
   width: 100% !important;
   height: 400px;
 }
@@ -180,10 +209,13 @@ h3 > .uemai {
   margin-top: 20px;
   width: 100%;
 }
-.prev h4{
+.prev h4 {
   font-weight: bold;
   margin-bottom: 10px;
   border: none;
+}
+.shortcuts p{
+  padding-top:5px;
 }
 
 </style>

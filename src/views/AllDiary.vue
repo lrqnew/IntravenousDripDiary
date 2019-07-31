@@ -3,6 +3,10 @@
     <Content :style="{ padding: '24px', minHeight: '500px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">我的日记本</p>
+        <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <i>搜索、浏览、删除我的日记</i>
         <Form inline>
           <FormItem>
@@ -21,7 +25,6 @@
               </Col>
             </Row>
           </FormItem>
-
           <FormItem>
             <Button type="primary" @click="selectByDate">查询</Button>
           </FormItem>
@@ -34,7 +37,13 @@
             <Button type="error" to="/writeDiary">写日记</Button>
           </FormItem>
         </Form>
-        <Table size="small" :columns="columns" :data="data" :loading="loading">
+        <Table
+          size="small"
+          :columns="columns"
+          :data="data"
+          :loading="loading"
+          @on-row-click="diartDetails"
+        >
           <template slot-scope="{ row, index }" slot="action">
             <Button
               icon="ios-create-outline"
@@ -63,7 +72,6 @@
             show-sizer
           />
         </div>
-
         <Modal v-model="modal" width="360">
           <p slot="header" style="color:#f60;text-align:center">
             <Icon type="ios-information-circle"></Icon>
@@ -90,7 +98,6 @@
     </Content>
   </Layout>
 </template>
-
 <script>
 export default {
   components: {},
@@ -134,11 +141,11 @@ export default {
       },
       diaryQuery: {
         pno: 0,
-        pageSize:5,
+        pageSize: 5,
         userId: localStorage.getItem("userId"),
         pageSizeOpts: [5, 10, 15]
       },
-      diaryCount:1,
+      diaryCount: 1,
       //表格数据
       columns: [
         {
@@ -165,17 +172,20 @@ export default {
         }
       ],
       data: [],
-      dId: "",
+      dId: ""
       //分页属性
-   
     };
   },
   methods: {
+    //查看日记
+    diartDetails(row) {
+      this.$router.push({ path: `/diaryDetails/${row.dId}` });
+    },
     pageChange(pno) {
       this.diaryQuery.pno = pno - 1;
       this.selectDiary();
     },
-    pageSizeChange(pageSize){
+    pageSizeChange(pageSize) {
       this.diaryQuery.pageSize = pageSize;
       this.selectDiary();
       console.log(pageSize);
@@ -232,8 +242,13 @@ export default {
     },
     handleChange(daterange) {
       this.date = daterange;
+    },
+    //返回上一页
+    peve() {
+      this.$router.go(-1);
     }
   },
+
   created() {
     var kwd = this.$route.query.kwd;
     if (kwd) {

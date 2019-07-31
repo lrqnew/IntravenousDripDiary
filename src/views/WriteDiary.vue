@@ -3,6 +3,10 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">记录日记</p>
+         <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <div class="edit_container">
              <quill-editor 
             v-model="diary.dContent" 
@@ -165,6 +169,10 @@ export default {
     handleClose(event, name) {
       const index = this.diary.dTag.indexOf(name);
       this.diary.dTag.splice(index, 1);
+    },
+     //返回上一页
+    peve() {
+      this.$router.go(-1);
     }
   },
   mounted() {

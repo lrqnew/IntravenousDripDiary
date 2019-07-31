@@ -3,6 +3,10 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">向我们反馈</p>
+         <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <i
           >你的好点子，意见或者建议都可以在这里向我们提交。|
           当然，您也可以直接发邮件(<a href="mailto:alger_li@163.com"
@@ -51,6 +55,10 @@ export default {
       }else{
          this.$Message.error("日记内容不能为空！");
       }
+    },
+     //返回上一页
+    peve() {
+      this.$router.go(-1);
     }
   }
 };

@@ -2,7 +2,11 @@
   <Layout :style="{ padding: '0 24px 24px' }">
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
-        <p slot="title" v-text="dTitle"></p>
+        <p slot="title" v-text="dTitle"> </p>
+        <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <div v-html="dContent"></div>
         <p class="tag">
           <Icon type="ios-pricetags" style="margin-right:20px;" />
@@ -76,6 +80,10 @@ export default {
       var day = dateMat.getDate();
       var date = year + "-" + month + "-" + day;
       return date;
+    },
+    //返回上一页
+    peve(){
+      this.$router.go(-1)
     }
   }
 };

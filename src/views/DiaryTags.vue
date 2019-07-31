@@ -3,6 +3,10 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">日记标签 Tags</p>
+         <a slot="extra" @click.prevent="peve">
+          <Icon type="md-arrow-round-back" />
+          返回
+        </a>
         <i>所有日记的标签,点击标签浏览相关联日记.</i>
         <div class="tags">
           <Tag
@@ -64,6 +68,10 @@ export default {
       // this.request.httpGet(this.requestUrl.selectagDiary,{kwd:tagName,userId:this.userId}).then(res=>{
       //   this.$router.push({path:'/allDiary',query:{data:res}})
       // })
+    },
+     //返回上一页
+    peve() {
+      this.$router.go(-1);
     }
   }
 };
