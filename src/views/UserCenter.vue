@@ -13,30 +13,62 @@
       <div class="total">
         <Row type="flex" justify="space-around">
           <Col span="6">
-            <Card>
-              <div style="text-align:center">
-               <h3>共记录字符1330个</h3>
+            <Card class="card">
+              <div class="statistical">
+                <Row type="flex" justify="space-around">
+                  <Col span="12">
+                    <p>共记录字符</p>
+                    <p>{{ totalInfo.charCount }}个</p>
+                  </Col>
+                  <Col span="12">
+                    <span class="staIcon"><Icon type="ios-paper"/></span>
+                  </Col>
+                </Row>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
-              <div style="text-align:center">
-                 <h3>共记录日记50篇</h3>
+              <div class="statistical">
+                <Row type="flex" justify="space-around">
+                  <Col span="12">
+                    <p>共记录日记</p>
+                    <p>{{ totalInfo.diaryCount }}篇</p>
+                  </Col>
+                  <Col span="12">
+                    <span class="staIcon"><Icon type="md-bookmarks"/></span>
+                  </Col>
+                </Row>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
-              <div style="text-align:center">
-                 <h3>注册30天</h3>
+              <div class="statistical">
+                <Row type="flex" justify="space-around">
+                  <Col span="12">
+                    <p>注册时间</p>
+                    <p>{{ totalInfo.regTime}}天</p>
+                  </Col>
+                  <Col span="12">
+                    <span class="staIcon"><Icon type="ios-time"/></span>
+                  </Col>
+                </Row>
               </div>
             </Card>
           </Col>
           <Col span="6">
             <Card>
-              <div style="text-align:center">
-                <h3>共有日记标签35个</h3>
+              <div class="statistical">
+                <Row type="flex" justify="space-around">
+                  <Col span="12">
+                    <p>共有日记标签</p>
+                    <p>{{ totalInfo.tagsCount}}个</p>
+                  </Col>
+                  <Col span="12">
+                    <span class="staIcon"><Icon type="md-pricetags"/></span>
+                  </Col>
+                </Row>
               </div>
             </Card>
           </Col>
@@ -73,22 +105,31 @@
                     v-for="(item, index) of diaryList"
                     :key="index"
                   >
-                    <h4 v-text="item.dTitle"></h4>
+                    <p class="tabTitle">
+                      <span v-text="item.dTitle"></span>
+                      <span>
+                        <Button
+                          type="primary"
+                          size="small"
+                          :to="`/diaryDetails/${item.dId}`"
+                          >查看该日记</Button
+                        >
+                      </span>
+                    </p>
+
                     <p v-html="item.dContent"></p>
                   </div>
                 </TabPane>
                 <TabPane label="最近的日记" name="5" icon="ios-clock">
-                  <div>
-                    <CellGroup>
-                      <Cell
-                        v-for="(item, index) of diaryList"
-                        :key="index"
-                        extra="浏览"
-                        :title="item.dTitle"
-                        :to="`/diaryDetails/${item.dId}`"
-                      />
-                    </CellGroup>
-                  </div>
+                  <CellGroup>
+                    <Cell
+                      v-for="(item, index) of diaryList"
+                      :key="index"
+                      extra="浏览"
+                      :title="item.dTitle"
+                      :to="`/diaryDetails/${item.dId}`"
+                    />
+                  </CellGroup>
                 </TabPane>
               </Tabs>
             </Card>
@@ -113,7 +154,7 @@
 </template>
 
 <script>
-import { userInfo } from 'os';
+import { userInfo } from "os";
 export default {
   components: {
     //创建script标签组件
@@ -139,19 +180,26 @@ export default {
   },
   data() {
     return {
-      user_email:JSON.parse(localStorage.getItem("userInfo")).email ,
+      user_email: JSON.parse(localStorage.getItem("userInfo")).email,
       userName: JSON.parse(localStorage.getItem("userInfo")).userName,
-      signs:JSON.parse(localStorage.getItem("userInfo")).signs,
+      signs: JSON.parse(localStorage.getItem("userInfo")).signs,
       diaryQuery: {
         pno: 0,
         pageSize: 3,
         userId: JSON.parse(localStorage.getItem("userInfo")).userId
       },
-      diaryList: []
+      diaryList: [],
+      totalInfo: {
+        charCount: "0",
+        diaryCount: "0",
+        tagsCount: "0",
+        regTime: "0"
+      }
     };
   },
   created() {
     this.selectDiary(1);
+    this.totalDinfo();
   },
   methods: {
     selectDiary(size) {
@@ -165,7 +213,27 @@ export default {
     goDetails(id) {
       this.$router.push({ path: "/diaryDetails" });
     },
-     
+    //查询统计信息
+    totalDinfo() {
+      this.request
+        .httpGet(this.requestUrl.totalDinfo, { userId: this.diaryQuery.userId })
+        .then(res => {
+          var tags = [];
+          res.data.forEach((element, index) => {
+            tags.push(...element.dTag.split(","));
+          });
+          //计算注册时间
+          var regTime = JSON.parse(localStorage.getItem("userInfo")).regTime;
+          var startDate = Date.parse(regTime);
+          var nowTime = new Date().toLocaleDateString();
+          var endDate = Date.parse(nowTime);
+          var days = (endDate - startDate) / (1 * 24 * 60 * 60 * 1000);
+          this.totalInfo.charCount = res.charCount == null ? 0 : res.charCount;
+          this.totalInfo.diaryCount = res.diaryCount;
+          this.totalInfo.tagsCount = tags.length;
+          this.totalInfo.regTime=days;
+        });
+    }
   }
 };
 </script>
@@ -184,10 +252,10 @@ h3 > .uemai {
   color: #c4c4c4;
   font-size: 1.5rem;
 }
-.signs{
+.signs {
   padding-left: 20px;
   font-size: 1.5rem;
-  color:#2db7f5 ;
+  color: #2db7f5;
 }
 .userSet {
   margin-left: 10px;
@@ -199,7 +267,7 @@ h3 > .uemai {
 .total .ivu-row-flex .ivu-col .ivu-card {
   width: 350px;
   height: 100px;
-  line-height: 100px;
+  /* line-height: 100px; */
 }
 .total .ivu-row-flex .ivu-col:nth-child(1) .ivu-card {
   background: #2db7f5;
@@ -222,10 +290,41 @@ h3 > .uemai {
   margin-bottom: 10px;
   border: none;
 }
-.shortcuts p{
-  padding-top:5px;
+.shortcuts p {
+  padding-top: 5px;
 }
-
+/* .card .ivu-card-body{
+  height: 100% !important;
+} */
+.statistical {
+  width: 100%;
+  height: 100%;
+}
+.statistical p {
+  height: 10px;
+  padding: 10px;
+}
+.statistical p:nth-child(2) {
+  font-size: 24px;
+  font-weight: bold;
+}
+.statistical .staIcon {
+  float: right;
+  font-size: 44px;
+}
+.ivu-tabs {
+  height: 500px;
+}
+.tabTitle {
+  margin-bottom: 15px;
+}
+.tabTitle span:nth-child(1) {
+  font-size: 20px;
+  font-weight: bold;
+}
+.tabTitle span:nth-child(2) {
+  float: right;
+}
 </style>
 
 

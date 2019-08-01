@@ -34,16 +34,9 @@
                   <Form
                     ref="loginFoemValidate"
                     :model="loginFoemValidate"
-                    :rules="loginRuleValidate"
-                  >
+                    :rules="loginRuleValidate">
                     <div class="form">
                       <div class="form-group">
-                        <!-- <input
-                        name="username"
-                        type="text"
-                        class="form-control simple-form-control"
-                        placeholder="电子邮件"
-                        />-->
                         <FormItem prop="mail">
                           <Input
                             placeholder="电子邮件"
@@ -53,19 +46,9 @@
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
-                        <!-- <ul class="parsley-errors-list">
-                        <li class="parsley-custom-error-message">请输入您的电子邮箱</li>
-                        </ul>-->
-                        <!-- <span class="glyphicon glyphicon-envelope"></span> -->
                       </div>
 
                       <div class="form-group">
-                        <!-- <input
-                        name="password"
-                        type="password"
-                        class="form-control simple-form-control"
-                        placeholder="您的密码"
-                        />-->
                         <FormItem prop="password">
                           <Input
                             type="password"
@@ -77,10 +60,6 @@
                             <Icon type="ios-lock-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
-                        <!-- <ul class="parsley-errors-list">
-                          <li class="parsley-custom-error-message">请输入密码</li>
-                        </ul>-->
-                        <!-- <span class="glyphicon glyphicon-lock"></span> -->
                       </div>
                       <div class="form-group">
                         <Button
@@ -105,47 +84,23 @@
                           <Input
                             placeholder="电子邮件"
                             size="large"
-                            v-model="formValidate.mail"
-                          >
+                            v-model="formValidate.mail">
                             <Icon type="ios-at-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
-
-                        <!-- <span class="glyphicon glyphicon-envelope"></span> -->
                       </div>
                       <div class="form-group">
-                        <!-- <input
-                          name="password"
-                          type="password"
-                          class="form-control simple-form-control"
-                          placeholder="您的密码"
-                          v-validate="'required|email'"
-                        />-->
-
-                        <!-- <span class="glyphicon glyphicon-lock"></span> -->
                         <FormItem prop="password">
                           <Input
                             type="password"
                             v-model="formValidate.password"
                             placeholder="您的密码"
-                            size="large"
-                          >
+                            size="large">
                             <Icon type="ios-lock-outline" slot="prepend"></Icon>
                           </Input>
                         </FormItem>
                       </div>
-
                       <div class="form-group">
-                        <!-- <input
-                          name="password"
-                          type="password"
-                          class="form-control simple-form-control"
-                          placeholder="您的密码"
-                        />-->
-                        <!-- <ul class="parsley-errors-list">
-                          <li class="parsley-custom-error-message">请输入确认密码</li>
-                        </ul>-->
-                        <!-- <span class="glyphicon glyphicon-lock"></span> -->
                         <FormItem prop="passwordCheck">
                           <Input
                             type="password"
@@ -299,19 +254,6 @@ export default {
           { type: "email", message: "不正确的电子邮件格式", trigger: "blur" },
           { validator: isHasEmail, trigger: "blur" }
         ],
-        // password: [
-        //   {
-        //     required: true,
-        //     message: "请填写密码",
-        //     trigger: "blur"
-        //   },
-        //   {
-        //     type: "string",
-        //     min: 6,
-        //     message: "密码长度不能小于6位",
-        //     trigger: "blur"
-        //   }
-        // ]
         password: [{ validator: validatePass, trigger: "blur" }],
         passwordCheck: [{ validator: validatePassCheck, trigger: "blur" }]
       }

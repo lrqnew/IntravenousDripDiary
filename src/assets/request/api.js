@@ -8,7 +8,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // axios.defaults.baseURL =process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'http://localhost:8081';
 // 配置数据请求的基础url
 axios.defaults.baseURL =process.env.VUE_APP_BASE_API; 
-axios.defaults.withCredentials = false
+axios.defaults.withCredentials = false;
 const SUCCESS = 200 // 成功时返回的code码，根据项目的不同和后台一致规定code码，此项目使用'200'
 
 // 请求拦截器

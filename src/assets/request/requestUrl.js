@@ -14,7 +14,9 @@ let url = {
     dateDiary:'/api/diary/dateDiary',
     delDiary:'/api/diary/delDiary',
     selectagDiary:'/api/diary/selectagDiary',
-    updateUser:'/api/user/updateUser'
+    updateUser:'/api/user/updateUser',
+    totalDinfo:'/api/diary/totalDinfo',
+    updatePwd:'/api/user/updatePwd'
     
 }
 
