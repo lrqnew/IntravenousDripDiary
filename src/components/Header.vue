@@ -16,7 +16,7 @@
         </Col>
         <Col span="6" :xs="2" :sm="4" :md="10" :lg="6">
         <router-link title="关于点滴日记" to="/about">
-              <span class="icon glyphicon glyphicon-info-sign"></span>
+              <Icon type="md-alert" style="font-size:20px;"/>
             </router-link>
         </Col>
     </Row>

@@ -1,20 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import About from '@/components/About'
-import Index from '@/components/Index'
-import UserCenter from '@/views/UserCenter'
-import WriteDiary from '@/views/WriteDiary'
-import AllDiary from '@/views/AllDiary'
-import DiaryTags from '@/views/DiaryTags'
-import Avatar from '@/views/Avatar'
-import PersonalData from '@/views/PersonalData'
-import ChangePwd from '@/views/ChangePwd'
-import Advice from '@/views/Advice'
-import DiaryDetails from '@/views/DiaryDetails'
+// import Login from '@/components/Login'
+const Login = () => import('@/components/Login')
+// import About from '@/components/About'
+const About = () => import('@/components/About')
+// import Index from '@/components/Index'
+const Index = () => import('@/components/Index')
+// import UserCenter from '@/views/UserCenter'
+const UserCenter = () => import('@/views/UserCenter')
+// import WriteDiary from '@/views/WriteDiary'
+const WriteDiary = () => import('@/views/WriteDiary')
+// import AllDiary from '@/views/AllDiary'
+ const AllDiary = () => import('@/views/AllDiary')
+// import DiaryTags from '@/views/DiaryTags'
+const DiaryTags = () => import('@/views/DiaryTags')
+// import Avatar from '@/views/Avatar'
+const Avatar = () => import('@/views/Avatar')
+// import PersonalData from '@/views/PersonalData'
+const PersonalData = () => import('@/views/PersonalData')
+// import ChangePwd from '@/views/ChangePwd'
+const ChangePwd = () => import('@/views/ChangePwd')
+// import Advice from '@/views/Advice'
+const Advice = () => import('@/views/Advice')
+// import DiaryDetails from '@/views/DiaryDetails'
+const DiaryDetails = () => import('@/views/DiaryDetails')
 Vue.use(Router)
 var router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [{
       path: '/',
       component: Login
