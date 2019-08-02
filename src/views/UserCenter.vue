@@ -48,7 +48,7 @@
                 <Row type="flex" justify="space-around">
                   <Col span="12">
                     <p>注册时间</p>
-                    <p>{{ totalInfo.regTime}}天</p>
+                    <p>{{ totalInfo.regTime }}天</p>
                   </Col>
                   <Col span="12">
                     <span class="staIcon"><Icon type="ios-time"/></span>
@@ -63,7 +63,7 @@
                 <Row type="flex" justify="space-around">
                   <Col span="12">
                     <p>共有日记标签</p>
-                    <p>{{ totalInfo.tagsCount}}个</p>
+                    <p>{{ totalInfo.tagsCount }}个</p>
                   </Col>
                   <Col span="12">
                     <span class="staIcon"><Icon type="md-pricetags"/></span>
@@ -219,9 +219,11 @@ export default {
         .httpGet(this.requestUrl.totalDinfo, { userId: this.diaryQuery.userId })
         .then(res => {
           var tags = [];
-          res.data.forEach((element, index) => {
-            tags.push(...element.dTag.split(","));
-          });
+          if (!res.data) {
+            res.data.forEach((element, index) => {
+              tags.push(...element.dTag.split(","));
+            });
+          }
           //计算注册时间
           var regTime = JSON.parse(localStorage.getItem("userInfo")).regTime;
           var startDate = Date.parse(regTime);
@@ -231,7 +233,7 @@ export default {
           this.totalInfo.charCount = res.charCount == null ? 0 : res.charCount;
           this.totalInfo.diaryCount = res.diaryCount;
           this.totalInfo.tagsCount = tags.length;
-          this.totalInfo.regTime=days;
+          this.totalInfo.regTime = days;
         });
     }
   }

@@ -16,7 +16,8 @@ let url = {
     selectagDiary:'/api/diary/selectagDiary',
     updateUser:'/api/user/updateUser',
     totalDinfo:'/api/diary/totalDinfo',
-    updatePwd:'/api/user/updatePwd'
+    updatePwd:'/api/user/updatePwd',
+    avatar:'/api/user/avatar'
     
 }
 
