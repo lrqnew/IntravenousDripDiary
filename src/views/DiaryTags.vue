@@ -1,6 +1,6 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
-    <Content :style="{ padding: '24px', minHeight: '280px', width: '80%' }">
+    <Content :style="{ padding: '24px', minHeight: '280px', width: '100%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">日记标签 Tags</p>
          <a slot="extra" @click.prevent="peve">

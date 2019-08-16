@@ -135,7 +135,7 @@
             </Card>
           </Col>
           <Col span="8">
-            <Card style="width:90%;height:400px;" dis-hover :bordered="false">
+            <Card style="width:100%;height:400px;" dis-hover :bordered="false">
               <p slot="title"><Icon type="ios-cloud" />今日天气</p>
               <!-- 点滴日记 -->
               <div id="weather-view-he"></div>
@@ -244,6 +244,9 @@ iframe {
   width: 100% !important;
   height: 400px;
 }
+#weather-view-he{
+  width: 100% !important;
+}
 </style>
 
 <style scoped>
@@ -267,7 +270,7 @@ h3 > .uemai {
   color: #fff;
 }
 .total .ivu-row-flex .ivu-col .ivu-card {
-  width: 350px;
+  /* width: 350px; */
   height: 100px;
   /* line-height: 100px; */
 }
@@ -327,6 +330,7 @@ h3 > .uemai {
 .tabTitle span:nth-child(2) {
   float: right;
 }
+
 </style>
 
 

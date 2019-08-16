@@ -1,6 +1,6 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
-    <Content :style="{ padding: '24px', minHeight: '500px', width: '80%' }">
+    <Content :style="{ padding: '24px', minHeight: '500px', width: '100%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">我的日记本</p>
         <a slot="extra" @click.prevent="peve">
@@ -151,7 +151,7 @@ export default {
         {
           title: "日记标题(双击查看)",
           key: "dTitle",
-          width: 900
+          width: 800
         },
         {
           title: "时间",
