@@ -13,7 +13,7 @@
             <FormItem label="昵称">
               <Input 
                 v-model="formItem.userName"
-                placeholder="请输入您的昵称"
+                placeholder="请输入您的昵称" 
               ></Input>
             </FormItem>
             <FormItem label="生日">
