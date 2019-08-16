@@ -3,7 +3,7 @@
     <Content :style="{ padding: '24px', minHeight: '280px', width: '100%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">我的资料</p>
-         <a slot="extra" @click.prevent="peve">
+         <a slot="extra" @click.prevent="peve"> 
           <Icon type="md-arrow-round-back" />
           返回
         </a>
