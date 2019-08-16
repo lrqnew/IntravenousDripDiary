@@ -8,7 +8,7 @@
           返回
         </a>
         <i>浏览、修改我的个人资料</i>
-        <div class="forms">
+        <div class="forms"> 
           <Form :model="formItem" :label-width="40" label-position="left">
             <FormItem label="昵称">
               <Input 
