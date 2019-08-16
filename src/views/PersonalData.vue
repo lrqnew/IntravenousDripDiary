@@ -10,7 +10,7 @@
         <i>浏览、修改我的个人资料</i>
         <div class="forms"> 
           <Form :model="formItem" :label-width="40" label-position="left">
-            <FormItem label="昵称">
+            <FormItem label="昵称"> 
               <Input 
                 v-model="formItem.userName"
                 placeholder="请输入您的昵称" 
