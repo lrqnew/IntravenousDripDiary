@@ -307,6 +307,9 @@ export default {
                 localStorage.setItem("token", res.token);
                 //保存用户信息
                 localStorage.setItem("userInfo",JSON.stringify(res.userInfo[0]));
+                let avatar=process.env.VUE_APP_BASE_API+"/images/"+res.userInfo[0].avatar;
+                //设置头像
+                this.$store.commit('setAvatar',avatar);
                 // //保存用户邮箱
                 // localStorage.setItem("user_email", res.userInfo[0].email);
                 // //保存用户id

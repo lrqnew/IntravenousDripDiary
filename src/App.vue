@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+   
     <router-view></router-view>
   </div>
 </template>
@@ -48,4 +49,10 @@ export default {
   background-color: #1b4b56;
   background-image: url(./assets/images/bg_night.png);
 }
+ #open{
+       display: block; 
+      }
+      #close{
+        display: none;
+      }
 </style>

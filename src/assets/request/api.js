@@ -26,7 +26,6 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((res) => {
   if (res.status ===SUCCESS) {
     if(res.data.code==408){
-      console.log(router);
       iView.Message.error(res.data.msg);
       router.push({ path: "/" });
       localStorage.clear();

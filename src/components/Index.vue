@@ -37,7 +37,7 @@
         <Sider hide-trigger :style="{ background: '#fff' }">
           <div class="demo-avatar">
             <Avatar
-              src="https://i.loli.net/2017/08/21/599a521472424.jpg"
+              :src="$store.getters.getAvatar"
               size="large"
             />
           </div>
@@ -49,9 +49,8 @@
           >
             <MenuItem name="2-1" to="/userCenter">
               <Icon type="md-person" />
-              用户中心
+              用户中心  
             </MenuItem>
-
             <Submenu name="2">
               <template slot="title">
                 <Icon type="md-bookmarks" />
@@ -94,7 +93,9 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      avatar:process.env.VUE_APP_BASE_API+"/images/"+JSON.parse(localStorage.getItem("userInfo")).avatar
+    };
   },
   mounted() {
     this.$router.push({ path: "/UserCenter" });

@@ -44,19 +44,20 @@
             :before-upload="handleBeforeUpload"
             multiple
             type="drag"
-            action="http://localhost:3000/api/user/avatar"
+            :action="uploadUrl"
+            :data="uploadData"
             style="display: inline-block;width:58px;"
           >
             <div style="width: 58px;height:58px;line-height: 58px;">
               <Icon type="ios-camera" size="20"></Icon>
             </div>
           </Upload>
-          <Modal title="View Image" v-model="visible">
-            <!-- <img
+          <Modal title="查看头像" v-model="visible">
+            <img
               :src="url"
               v-if="visible"
               style="width: 100%"
-            /> -->
+            />
           </Modal>
         </div>
       </Card>
@@ -65,17 +66,19 @@
 </template>
 
 <script>
+import { userInfo } from 'os';
 export default {
   components: {},
   data() {
     return {
+      avatar:'',
       url:'',
       token:localStorage.getItem('token'),
+      uploadUrl:process.env.VUE_APP_BASE_API+this.requestUrl.avatar,
+      uploadData:{userId:JSON.parse(localStorage.getItem("userInfo")).userId},
       defaultList: [
         {
-          name: "a42bdcc1178e62b4694c830f028db5c0",
-          url:
-            "https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar"
+          url:sessionStorage.getItem("avatar")
         }
       ],
       imgName: "",
@@ -84,6 +87,20 @@ export default {
     };
   },
   methods: {
+    //  handleBeforeUpload (file) { /*上传前确定上传地址*/
+    //             let researchId = this.activeUploadId;
+    //             this.uploadUrl = process.env.VUE_APP_BASE_API+requestUrl.avatar;
+    //             this.uploadData = {
+    //                 role: patient,
+    //                 abc: file
+    //             };
+    //             let promise = new Promise((resolve) => {
+    //                 this.$nextTick(function () {
+    //                     resolve(true);
+    //                 });
+    //             });
+    //             return promise; //通过返回一个promis对象解决
+    //         },
     handleView(name) {
       this.imgName = name;
       this.visible = true;
@@ -96,10 +113,11 @@ export default {
       // file.url =
       //   "https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar";
       // file.name = "7eb99afb9d5f317c912f08b5212fd69a";
-      var newUrl=res.path.split("\\");
-      console.log(newUrl);
-       console.log(res);
-       console.log(file);
+      let avatar=process.env.VUE_APP_BASE_API+"/images/"+res.avatar;
+      this.avatar=avatar;
+      this.url=avatar;
+      this.$store.commit('setAvatar',avatar);
+      file.url =avatar;
     },
     handleFormatError(file) {
       this.$Notice.warning({
@@ -132,6 +150,7 @@ export default {
   },
   mounted() {
     this.uploadList = this.$refs.upload.fileList;
+    this.url=this.$refs.upload.fileList[0].url;
   }
 };
 </script>
