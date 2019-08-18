@@ -219,7 +219,7 @@ export default {
         .httpGet(this.requestUrl.totalDinfo, { userId: this.diaryQuery.userId })
         .then(res => {
           var tags = [];
-          if (!res.data) {
+          if (res.data) {
             res.data.forEach((element, index) => {
               tags.push(...element.dTag.split(","));
             });
