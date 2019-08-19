@@ -152,7 +152,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog">
-        <div class="modal-content" style="margin-top: 344px;">
+        <div class="modal-content" style="margin-top:100px;">
           <div class="modal-body" align="center">
             <p>&nbsp;</p>
             <img src="../assets/images/the_sun.png" alt />

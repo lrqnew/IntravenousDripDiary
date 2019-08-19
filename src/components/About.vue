@@ -53,7 +53,7 @@
               aria-hidden="true"
             >
               <div class="modal-dialog">
-                <div class="modal-content" style="margin-top: 344px;">
+                <div class="modal-content" style="margin-top:0px;">
                   <!-- 模态框头部 -->
                   <div class="modal-header">
                     <h4 class="modal-title">更新记录</h4>
@@ -75,12 +75,11 @@
                         <Timeline>
                           <TimelineItem color="green">
                             <Icon type="ios-trophy" slot="dot"></Icon>
-                            <span>发布里程碑版本</span>
+                            <span>发布里程碑版本 1.0</span>
                           </TimelineItem>
-                          <TimelineItem>PC端增加了日记导出功能。</TimelineItem>
+                          <!-- <TimelineItem>PC端增加了日记导出功能。</TimelineItem>
                           <TimelineItem>PC端日记阅读页面增加天气信息。</TimelineItem>
-                          <TimelineItem>修复PC端日记阅读页面在部分情况下显示错位的问题。</TimelineItem>
-                          
+                          <TimelineItem>修复PC端日记阅读页面在部分情况下显示错位的问题。</TimelineItem> -->
                         </Timeline>
                         <p>
                           <br />
