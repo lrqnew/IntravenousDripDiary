@@ -12,6 +12,7 @@ import PersonalData from '@/views/PersonalData'
 import ChangePwd from '@/views/ChangePwd'
 import Advice from '@/views/Advice'
 import DiaryDetails from '@/views/DiaryDetails'
+import UpdateDiary from '@/views/UpdateDiary'
 // const Login = () => import('@/components/Login')
 // const About = () => import('@/components/About')
 // const Index = () => import('@/components/Index')
@@ -72,6 +73,10 @@ var router = new Router({
         {
           path:'/diaryDetails/:id',
           component:DiaryDetails
+        },
+        {
+          path:'/updateDiary/:id',
+          component:UpdateDiary
         }
       ]
     }

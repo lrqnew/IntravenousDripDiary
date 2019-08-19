@@ -59,7 +59,9 @@ export default {
         .httpGet(this.requestUrl.diaryTags, { userId: this.userId })
         .then(res => {
           res.forEach((element, i) => {
-            this.dTags.push(...element.dTag.split(","));
+            if(element.dTag!=""){
+              this.dTags.push(...element.dTag.split(","));
+            }
           });
         });
     },

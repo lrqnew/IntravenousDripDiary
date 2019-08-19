@@ -17,7 +17,8 @@ let url = {
     updateUser:'/api/user/updateUser',
     totalDinfo:'/api/diary/totalDinfo',
     updatePwd:'/api/user/updatePwd',
-    avatar:'/api/user/avatar'
+    avatar:'/api/user/avatar',
+    updateDiary:'/api/diary/updateDiary'
     
 }
 

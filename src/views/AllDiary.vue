@@ -1,6 +1,6 @@
 <template>
   <Layout :style="{ padding: '0 24px 24px' }">
-    <Content :style="{ padding: '24px', minHeight: '500px', width: '100%' }">
+    <Content :style="{ padding: '24px', minHeight: '500px', width: '96%' }">
       <Card :bordered="false" class="write" dis-hover>
         <p slot="title">我的日记本</p>
         <a slot="extra" @click.prevent="peve">
@@ -50,7 +50,7 @@
               type="primary"
               size="small"
               style="margin-right: 5px"
-              @click="show(row)"
+              @click="updateDiary(row.dId)"
               >编辑</Button
             >
             <Button
@@ -189,10 +189,9 @@ export default {
       this.diaryQuery.pageSize = pageSize;
       this.selectDiary();
     },
-
-    show(show) {
-     
-       console.log(this.date)
+   //修改日记
+    updateDiary(dId) {
+       this.$router.push({path:`/updateDiary/${dId}`});
     },
     //删除日记
     remove() {
@@ -209,6 +208,8 @@ export default {
             if (res.code === 200) {
               this.selectDiary();
               this.$Message.success("删除成功");
+            }else{
+               this.$Error.success("删除失败");
             }
           });
       }, 1000);
