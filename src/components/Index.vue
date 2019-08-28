@@ -36,7 +36,7 @@
       <Layout>
         <Sider hide-trigger :style="{ background: '#fff' }">
           <div class="demo-avatar">
-            <Avatar
+            <Avatar 
               :src="$store.getters.getAvatar"
               size="large"
             />
