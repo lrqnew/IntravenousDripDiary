@@ -16,5 +16,9 @@ Vue.use(iView);
 new Vue({
   render: h => h(App),
   store,
-  router
+  router,
+  mounted () {
+    // 触发renderAfterDocumentEvent
+    document.dispatchEvent(new Event('render-event'))
+  }
 }).$mount('#app')
