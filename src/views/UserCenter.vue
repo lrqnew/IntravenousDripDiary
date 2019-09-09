@@ -190,10 +190,10 @@ export default {
       },
       diaryList: [],
       totalInfo: {
-        charCount: "0",
-        diaryCount: "0",
-        tagsCount: "0",
-        regTime: "0"
+        charCount: 0,
+        diaryCount: 0,
+        tagsCount: 0,
+        regTime: 0
       }
     };
   },

@@ -28,12 +28,15 @@ module.exports = {
       })
     }
   },
+  // configureWebpack: {
+  //   plugins: [compress]
+  // },
   publicPath: './',
   configureWebpack: () => {
+
     if (process.env.NODE_ENV === 'production') {
       return {
         plugins: [
-          compress,
           new PrerenderSPAPlugin({
             staticDir: resolve('dist'),
             routes: ['/', '/about'], // 你需要预渲染的路由
@@ -49,6 +52,8 @@ module.exports = {
           })
         ]
       }
+    }else{
+      return {plugins: [compress]}
     }
   },
   chainWebpack: config => {
