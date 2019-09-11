@@ -10,7 +10,7 @@
         <div v-html="dContent"></div>
         <p class="tag">
           <Icon type="ios-pricetags" style="margin-right:20px;" />
-          <Tag
+          <Tag v-if="item!==''"
             :color="tagsColor[index]"
             v-for="(item, index) of dTag"
             :key="index"
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { constants } from 'crypto';
 export default {
   components: {},
   data() {

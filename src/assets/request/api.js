@@ -24,21 +24,25 @@ axios.interceptors.request.use((config) => {
 })
 //返回状态判断
 axios.interceptors.response.use((res) => {
+  console.log(res)
   if (res.status ===SUCCESS) {
-    if(res.data.code==408){
-      iView.Message.error(res.data.msg);
-      router.push({ path: "/" });
-      localStorage.clear();
-    }
+    // if(res.data.code==408){
+    //   iView.Message.error(res.data.msg);
+    //   router.push({ path: "/" });
+    //   localStorage.clear();
+    // }
     return Promise.resolve(res)
   }
   else{
-    console.log(res);
+    
     return Promise.reject(new Error(res.status))
   }
   
 }, (error) => {
   // console.log('error=>', error)
+    iView.Message.error('登录过期，请重新登录');
+    router.push({ path: "/" });
+    localStorage.clear();
   return Promise.reject(new Error(error))
 })
  
