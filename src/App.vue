@@ -28,7 +28,7 @@ export default {
     }
     //检测设备重定向
     var url = window.location.pathname;
-    var wapurl = "http://localhost:4200" + url;
+    var wapurl = "http://wap.oneint.cn" + url;
 
     if (
       /AppleWebKit.*Mobile/i.test(navigator.userAgent) ||

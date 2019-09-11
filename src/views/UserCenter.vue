@@ -246,6 +246,7 @@ iframe {
 }
 #weather-view-he{
   width: 100% !important;
+  height: 100%;
 }
 </style>
 
